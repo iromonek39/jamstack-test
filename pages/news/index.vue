@@ -1,0 +1,243 @@
+<template>
+  <div>
+    <div class="open_pulldown_contents">
+      <span
+        v-for="item in newsData"
+        :key="item.prefecture"
+        @click="doSearchFilter(item.prefecture)">
+        {{ item.prefecture }}
+      </span>
+    </div>
+    <div class="shop_page_container_inner_contents_left_searchArea_checkArea">
+      <p>ブランド</p>
+      <div
+        v-for="brand in createBrandList"
+        :key="brand"
+        class="checkbox">
+        <input
+          :id="brand"
+          type="checkbox"
+          :value="brand"
+          @change="checkItem(brand)">
+        <label :for="brand">
+          {{ brand }}
+        </label>
+      </div>
+    </div>
+    <div class="shop_page_container_inner_contents_left_searchArea_checkArea">
+      <p>取扱アイテム</p>
+      <div
+        v-for="product in createItemList"
+        :key="product"
+        class="checkbox">
+        <input
+          :id="product"
+          type="checkbox"
+          :value="product"
+          @change="checkItem(product)">
+        <label :for="product">
+          {{ product }}
+        </label>
+      </div>
+    </div>
+    <div class="shop_page_container_inner_contents_left_searchArea_checkArea end">
+      <p>取扱アイテム</p>
+    </div>
+    <div
+      v-for="item in listArr"
+      :key="item.prefecture"
+      class="area_wrap">
+      <p class="prefecture">{{ item.prefecture }}</p>
+      <ul
+        id="北海道"
+        class="shop_up">
+        <li
+          v-for="(data, dataIndex) in item.data"
+          :key="dataIndex">
+          <p class="shop_name">
+            {{ data.shop_name }}
+          </p>
+          <p class="shop_adress">
+            {{ data.shop_address }}
+          </p>
+          <p class="shop_tel">
+            TEL：{{ data.shop_tel }}
+          </p>
+          <span>取扱ブランド：</span>
+          <div v-if="data.brand.length !== 0">
+            <p
+              v-for="brand in data.brand"
+              :key="brand"
+              class="shop_brand">
+              {{ brand }}
+            </p>
+          </div>
+          <span>取扱アイテム：</span>
+          <div v-if="data.products.length !== 0">
+            <p
+              v-for="product in data.products"
+              :key="product"
+              class="shop_brand">
+              {{ product }}
+            </p>
+          </div>
+          <a
+            id="popUpMapBtn"
+            class="shop_map pc_contents">
+            Google Map >
+          </a>
+          <a
+            id="popUpMapBtn"
+            class="shop_map sp_contents">
+            <img src="<?php echo get_template_directory_uri(); ?>/images/shop/sp_map_icon.svg" alt="">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'News',
+  data () {
+    return {
+      test: [
+        ['1', '2'],
+        ['1', '2', '3']
+      ],
+      newsData: [
+        {
+          id: 1,
+          prefecture: '北海道',
+          data: [
+            {
+              id: 1,
+              shop_name: '北海道 name 111',
+              shop_adress: '北海道 title 111',
+              shop_tel: '000-0000-0000',
+              brand: [
+                'ブランド3'
+              ],
+              products: [
+                'アイテム1',
+                'アイテム2'
+              ]
+            },
+            {
+              id: 2,
+              shop_name: '北海道 name 222',
+              shop_adress: '北海道 title 222',
+              shop_tel: '000-0000-0000',
+              brand: [
+                'ブランド1'
+              ],
+              products: [
+                'アイテム1',
+                'アイテム2'
+              ]
+            },
+            {
+              id: 3,
+              shop_name: '北海道 name 333',
+              shop_adress: '北海道 title 333',
+              shop_tel: '000-0000-0000',
+              brand: [
+                'ブランド1',
+                'ブランド2'
+              ],
+              products: [
+                'アイテム1',
+                'アイテム2'
+              ]
+            }
+          ]
+        },
+        {
+          id: 2,
+          prefecture: '東北',
+          data: [
+            {
+              id: 1,
+              shop_name: '東北 name 111',
+              shop_adress: '東北 title 111',
+              shop_tel: '000-0000-0000',
+              brand: [
+                'ブランド2',
+                'ブランド4'
+              ],
+              products: [
+              ]
+            },
+            {
+              id: 2,
+              shop_name: '東北 name 222',
+              shop_adress: '東北 title 222',
+              shop_tel: '000-0000-0000',
+              brand: [
+                'ブランド3'
+              ],
+              products: [
+                'アイテム2'
+              ]
+            }
+          ]
+        }
+      ],
+      brandList: [],
+      productList: [],
+      filterArr: [],
+      checkList: [],
+      afterCheckListArr: []
+      // brandCheckArr: [],
+      // productCheckArr: []
+    }
+  },
+  computed: {
+    listArr () {
+      if (this.filterArr.length === 0) {
+        return this.newsData
+      } else {
+        return this.filterArr
+      }
+    },
+    createBrandList () {
+      this.newsData.forEach(item => {
+        item.data.forEach(brand => {
+          this.brandList.push(...brand.brand)
+        })
+      })
+      return [...new Set(this.brandList)]
+    },
+    createItemList () {
+      this.newsData.forEach(items => {
+        console.log(items)
+        items.data.forEach(item => {
+          console.log(item)
+          this.productList.push(...item.products)
+        })
+      })
+      return [...new Set(this.productList)]
+    }
+  },
+  created () {
+  },
+  methods: {
+    doSearchFilter (keywords) {
+      console.log(keywords)
+      this.filterArr = this.newsData.filter(item => {
+        console.log(item.prefecture)
+        return item.prefecture === keywords
+      })
+    },
+    checkItem (item) {
+      this.checkList.push(item)
+      console.log(this.listArr)
+
+      // const filterArr = this.newsData.filter(item => {
+      //   item.
+      // })
+    }
+  }
+}
+</script>

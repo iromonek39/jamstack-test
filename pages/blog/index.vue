@@ -2,11 +2,13 @@
   <div class="blog">
     <Search
       @searchResults="getSearchResults"/>
+    <Category />
     <ul class="blog__list">
       <li
         v-for="(item, index) in blogData"
         :key="index"
-        class="blog__item">
+        class="blog__item"
+        @click="toBlogsDetail(item)">
         <img
           v-if="item.thumbnail"
           :src="item.thumbnail"
@@ -19,6 +21,16 @@
           class="blog__title">
           {{ item.title }}
         </h2>
+        <span
+          v-for="category in item.category"
+          :key="'category-' + category.term_id">
+          {{ category.name }}
+        </span>
+        <span
+          v-for="tag in item.tag"
+          :key="'tag-' + tag.term_id">
+          {{ tag.name }}
+        </span>
         <!-- eslint-disable-next-line vue/no-v-html -->
         <!-- <p
           v-html="item.content"
@@ -57,14 +69,20 @@ export default {
       }
     }
   },
-  mounted () {
+  created () {
     this.getApi()
     this.getSingleData(2113)
   },
   methods: {
     ...mapActions('api', ['getApi', 'getSingleData']),
+    ...mapActions('blog', ['updateBlogDetailData']),
     getSearchResults (res) {
       this.blogData = res
+    },
+    toBlogsDetail (blogData) {
+      console.log(blogData)
+      this.updateBlogDetailData(blogData)
+      this.$router.push(`/blog/${blogData.id}`)
     }
   }
 }
