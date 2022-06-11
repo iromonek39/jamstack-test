@@ -16,6 +16,7 @@
         class="checkbox">
         <input
           :id="brand"
+          v-model="brandCheckboxArr"
           type="checkbox"
           :value="brand"
           @change="checkItem(brand)">
@@ -40,9 +41,7 @@
         </label>
       </div>
     </div>
-    <div class="shop_page_container_inner_contents_left_searchArea_checkArea end">
-      <p>取扱アイテム</p>
-    </div>
+    <h3>{{ brandCheckboxArr }}</h3>
     <div
       v-for="item in listArr"
       :key="item.prefecture"
@@ -53,6 +52,7 @@
         class="shop_up">
         <li
           v-for="(data, dataIndex) in item.data"
+          v-show="data.display"
           :key="dataIndex">
           <p class="shop_name">
             {{ data.shop_name }}
@@ -122,7 +122,8 @@ export default {
               products: [
                 'アイテム1',
                 'アイテム2'
-              ]
+              ],
+              display: true
             },
             {
               id: 2,
@@ -135,7 +136,8 @@ export default {
               products: [
                 'アイテム1',
                 'アイテム2'
-              ]
+              ],
+              display: true
             },
             {
               id: 3,
@@ -149,7 +151,8 @@ export default {
               products: [
                 'アイテム1',
                 'アイテム2'
-              ]
+              ],
+              display: true
             }
           ]
         },
@@ -167,7 +170,8 @@ export default {
                 'ブランド4'
               ],
               products: [
-              ]
+              ],
+              display: true
             },
             {
               id: 2,
@@ -179,7 +183,8 @@ export default {
               ],
               products: [
                 'アイテム2'
-              ]
+              ],
+              display: true
             }
           ]
         }
@@ -188,8 +193,8 @@ export default {
       productList: [],
       filterArr: [],
       checkList: [],
-      afterCheckListArr: []
-      // brandCheckArr: [],
+      afterCheckListArr: [],
+      brandCheckboxArr: []
       // productCheckArr: []
     }
   },
@@ -211,32 +216,49 @@ export default {
     },
     createItemList () {
       this.newsData.forEach(items => {
-        console.log(items)
+        // console.log(items)
         items.data.forEach(item => {
-          console.log(item)
+          // console.log(item)
           this.productList.push(...item.products)
         })
       })
       return [...new Set(this.productList)]
     }
   },
-  created () {
+  watch: {
   },
   methods: {
     doSearchFilter (keywords) {
-      console.log(keywords)
+      // console.log(keywords)
       this.filterArr = this.newsData.filter(item => {
-        console.log(item.prefecture)
+        // console.log(item.prefecture)
         return item.prefecture === keywords
       })
     },
-    checkItem (item) {
-      this.checkList.push(item)
-      console.log(this.listArr)
-
-      // const filterArr = this.newsData.filter(item => {
-      //   item.
-      // })
+    checkItem () {
+      console.log(this.brandCheckboxArr)
+      if (this.brandCheckboxArr.length > 0) {
+        this.listArr.forEach(listData => {
+          listData.data.forEach(item => {
+            for (let i = 0; i < this.brandCheckboxArr.length; i++) {
+            // this.brandCheckboxArr.forEach(checkItem => {
+              if (item.brand.indexOf(this.brandCheckboxArr[i]) >= 0) {
+                item.display = true
+                break
+              } else {
+                item.display = false
+              }
+            // })
+            }
+          })
+        })
+      } else {
+        this.listArr.forEach(listData => {
+          listData.data.forEach(item => {
+            item.display = true
+          })
+        })
+      }
     }
   }
 }
