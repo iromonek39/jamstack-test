@@ -33,6 +33,7 @@
         class="checkbox">
         <input
           :id="product"
+          v-model="productCheckArr"
           type="checkbox"
           :value="product"
           @change="checkItem(product)">
@@ -120,8 +121,7 @@ export default {
                 'ブランド3'
               ],
               products: [
-                'アイテム1',
-                'アイテム2'
+                'アイテム1'
               ],
               display: true
             },
@@ -134,7 +134,6 @@ export default {
                 'ブランド1'
               ],
               products: [
-                'アイテム1',
                 'アイテム2'
               ],
               display: true
@@ -149,8 +148,7 @@ export default {
                 'ブランド2'
               ],
               products: [
-                'アイテム1',
-                'アイテム2'
+                'アイテム3'
               ],
               display: true
             }
@@ -194,8 +192,8 @@ export default {
       filterArr: [],
       checkList: [],
       afterCheckListArr: [],
-      brandCheckboxArr: []
-      // productCheckArr: []
+      brandCheckboxArr: [],
+      productCheckArr: []
     }
   },
   computed: {
@@ -229,26 +227,30 @@ export default {
   },
   methods: {
     doSearchFilter (keywords) {
-      // console.log(keywords)
       this.filterArr = this.newsData.filter(item => {
-        // console.log(item.prefecture)
         return item.prefecture === keywords
       })
+      this.checkItem()
     },
     checkItem () {
       console.log(this.brandCheckboxArr)
-      if (this.brandCheckboxArr.length > 0) {
+      if (this.brandCheckboxArr.length > 0 || this.productCheckArr.length > 0) {
         this.listArr.forEach(listData => {
           listData.data.forEach(item => {
-            for (let i = 0; i < this.brandCheckboxArr.length; i++) {
-            // this.brandCheckboxArr.forEach(checkItem => {
-              if (item.brand.indexOf(this.brandCheckboxArr[i]) >= 0) {
+            if (this.brandCheckboxArr.length > 0 && this.productCheckArr.length > 0) {
+              if (item.brand.filter(item => this.brandCheckboxArr.includes(item)).length !== 0 && item.products.filter(item => this.productCheckArr.includes(item)).length !== 0) {
+                console.log('1')
                 item.display = true
-                break
               } else {
+                console.log('2')
                 item.display = false
               }
-            // })
+            } else if (item.brand.filter(item => this.brandCheckboxArr.includes(item)).length !== 0 || item.products.filter(item => this.productCheckArr.includes(item)).length !== 0) {
+              console.log('3')
+              item.display = true
+            } else {
+              console.log('4')
+              item.display = false
             }
           })
         })
