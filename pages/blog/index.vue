@@ -54,6 +54,9 @@ export default {
       searchData: []
     }
   },
+  async fetch ({ store }) {
+    await store.dispatch('api/getApi')
+  },
   computed: {
     ...mapState('api', ['apiData', 'singleData']),
     blogData: {
@@ -70,11 +73,11 @@ export default {
     }
   },
   created () {
-    this.getApi()
-    this.getSingleData(2113)
+    // this.getApi()
+    // this.getSingleData(2113)
   },
   methods: {
-    ...mapActions('api', ['getApi', 'getSingleData']),
+    // ...mapActions('api', ['getApi', 'getSingleData']),
     ...mapActions('blog', ['updateBlogDetailData']),
     getSearchResults (res) {
       this.blogData = res

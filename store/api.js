@@ -1,7 +1,9 @@
 export const state = () => ({
   apiData: {},
   singleData: {},
-  cmsDataBlogs: {}
+  cmsDataBlogs: {},
+  shopList: {},
+  sliderList: {}
 })
 
 export const mutations = {
@@ -13,36 +15,63 @@ export const mutations = {
   },
   setCmsDataBlogs (state, payload) {
     state.cmsDataBlogs = payload
+  },
+  setShop (state, payload) {
+    state.shopList = payload
+  },
+  setSlider (state, payload) {
+    state.sliderList = payload
   }
 }
 
 export const actions = {
-  getApi (vuexContext) {
-    this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post')
-      .then((res) => {
-        vuexContext.commit('setApi', res.data)
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  async getApi ({ commit }) {
+    const { data } = await this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post')
+    commit('setApi', data)
+    // this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post')
+    //   .then(res => {
+    //     commit('setApi', res.data)
+    //     console.log(res)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   },
-  getSingleData (vuexContext, featuredId) {
+  getSingleData ({ commit }, featuredId) {
     this.$axios.get(`http://localhost/wp-test/nuxt2/wp-json/wp/api/blog/${featuredId}`)
-      .then((res) => {
-        vuexContext.commit('setSingleDate', res.data)
+      .then(res => {
+        commit('setSingleDate', res.data)
         console.log(res)
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err)
       })
   },
-  doSearch (vuexContext, searchWord) {
+  doSearch ({ commit }, searchWord) {
     this.$axios.get(`http://localhost/wp-test/nuxt2/wp-json/wp/api/search/${searchWord}`)
-      .then((res) => {
+    // http://localhost/wp-test/nuxt2/wp-json/acf/v3/shop_list
+      .then(res => {
         console.log(res)
       })
-      .catch((err) => {
+      .catch(err => {
+        console.log(err)
+      })
+  },
+  getShopList ({ commit }) {
+    this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/acf/v3/shop_list')
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+  getSliderList ({ commit }) {
+    this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/acf/v3/slider')
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
         console.log(err)
       })
   }
