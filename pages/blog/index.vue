@@ -54,9 +54,6 @@ export default {
       searchData: []
     }
   },
-  async fetch ({ store }) {
-    await store.dispatch('api/getApi')
-  },
   computed: {
     ...mapState('api', ['apiData', 'singleData']),
     blogData: {
