@@ -3,7 +3,9 @@ export const state = () => ({
   singleData: {},
   cmsDataBlogs: {},
   shopList: {},
-  sliderList: {}
+  sliderList: {},
+  newsList: {},
+  newsDetail: {}
 })
 
 export const mutations = {
@@ -21,6 +23,12 @@ export const mutations = {
   },
   setSlider (state, payload) {
     state.sliderList = payload
+  },
+  setNews (state, payload) {
+    state.newsList = payload
+  },
+  setNewsDetail (state, payload) {
+    state.newsDetail = payload
   }
 }
 
@@ -74,5 +82,12 @@ export const actions = {
       .catch(err => {
         console.log(err)
       })
+  },
+  async getNewsList ({ commit }) {
+    const { data } = await this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/acf/v3/news')
+    commit('setNews', data)
+  },
+  updateNewsItem ({ commit }, obj) {
+    commit('setNewsDetail', obj)
   }
 }

@@ -53,7 +53,6 @@ export default {
 
 <style lang="scss" scoped>
 .slider {
-  height: 600px;
   width: 100%;
   text-align: center;
 }

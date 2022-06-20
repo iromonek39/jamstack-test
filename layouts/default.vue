@@ -7,6 +7,10 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  async fetch ({ store }) {
+    await console.log(store)
+    await store.dispatch('api/getApi')
+  }
 }
 </script>
