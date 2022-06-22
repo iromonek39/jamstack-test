@@ -9,10 +9,10 @@
           :key="item.id"
           @click="linkToNewsItem(item)">
           <h2>
-            {{ item.acf.title }}
+            <!-- {{ item.acf.title }} -->
           </h2>
           <p>
-            {{ item.acf.contents }}
+            <!-- {{ item.acf.contents }} -->
           </p>
         </li>
       </ul>
@@ -29,7 +29,8 @@ export default {
   mixins: [linkTo],
   async asyncData ({ $axios }) {
     // const article = await $axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post')
-    const news = await $axios.get('http://localhost/wp-test/nuxt2/wp-json/acf/v3/news')
+    // const news = await $axios.get('http://localhost/wp-test/nuxt2/wp-json/acf/v3/news')
+    const news = await $axios.get('http://192.168.33.10/wp-json/wp/api/post') // windows
     return {
       // article,
       news: news.data
