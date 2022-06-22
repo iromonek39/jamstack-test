@@ -49,7 +49,7 @@
       class="area_wrap">
       <p class="prefecture">{{ item.prefecture }}</p>
       <ul
-        id="北海道"
+        id="test"
         class="shop_up">
         <li
           v-for="(data, dataIndex) in item.data"
@@ -261,6 +261,7 @@ export default {
           })
         })
       }
+      console.log(document.getElementById('test').hasChildNodes())
     }
   }
 }

@@ -26,7 +26,8 @@ export const mutations = {
 
 export const actions = {
   async getApi ({ commit }) {
-    const { data } = await this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post')
+    // const { data } = await this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post') // mac
+    const { data } = await this.$axios.get('http://192.168.33.10/wp-json/wp/api/post') // windows
     commit('setApi', data)
     // this.$axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post')
     //   .then(res => {

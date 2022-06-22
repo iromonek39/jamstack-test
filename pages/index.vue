@@ -1,6 +1,7 @@
 <template>
   <div>
     <Slider/>
+    <Blog />
   </div>
 </template>
 
@@ -11,9 +12,9 @@ import linkTo from '@/mixins/linkTo.mixin.js'
 export default {
   name: 'IndexPage',
   mixins: [linkTo],
-  async fetch ({ store }) {
-    await store.dispatch('api/getApi')
-  },
+  // async fetch ({ store }) {
+  //   await store.dispatch('api/getApi')
+  // },
   methods: {
     // ...mapActions('api', ['getApi', 'getSingleData'])
   }
