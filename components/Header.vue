@@ -1,30 +1,33 @@
 <template>
-  <header>
-    <div class="wrapper">
+  <header class="header">
+    <div class="header__inner">
       <h1
-        class="logo"
-        @click="linkTo('')">
-        LOGO
+        class="header__logo">
+        <nuxt-link to="/">
+          <img
+            src="@/assets/images/logo.svg"
+            alt="">
+        </nuxt-link>
       </h1>
-      <nav>
-        <ul class="list">
+      <nav class="nav">
+        <ul class="nav__list">
           <li
-            class="item"
+            class="nav__item"
             @click="linkTo('test')">
             search
           </li>
           <li
-            class="item"
+            class="nav__item"
             @click="linkTo('blog')">
             blog
           </li>
           <li
-            class="item"
+            class="nav__item"
             @click="linkTo('news')">
             news
           </li>
           <li
-            class="item"
+            class="nav__item"
             @click="linkTo('contact-us')">
             contact us
           </li>
@@ -48,33 +51,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-header {
+.header {
   width: 100%;
+
+  .header__inner {
+    display: flex;
+    padding: 16px 32px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header__logo {
+    width: 180px;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
-.wrapper {
-  display: flex;
-  padding: 20px 40px;
-  align-content: center;
-  justify-content: space-between;
-}
-.logo {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 48px;
-}
-.list {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  gap: 60px;
-}
-.logo,
-.item {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
+
+.nav {
+  .nav__list {
+    display: flex;
+    align-items: center;
+  }
+  .nav__item {
+    padding: 0 16px;
+    color: var(--main-text-color);
+    cursor: pointer;
+    font-weight: bold;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
 </style>

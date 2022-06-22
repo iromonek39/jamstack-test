@@ -1,3 +1,7 @@
+:root {
+  --main-text-color: #4c4948;
+}
+
 img {
   width: 100%;
   height: auto;

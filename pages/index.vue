@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Slider/>
+    <!-- <Slider/> -->
     <div class="news">
       <h1>NEWS</h1>
       <ul>
