@@ -1,18 +1,18 @@
 <template>
   <div>
     <!-- <Slider/> -->
-    <div class="news">
-      <h1>NEWS</h1>
+    <div class="news contents">
+      <h1 class="contents__title">NEWS</h1>
       <ul>
         <li
           v-for="item in news"
           :key="item.id"
           @click="linkToNewsItem(item)">
           <h2>
-            <!-- {{ item.acf.title }} -->
+            {{ item.acf.title }}
           </h2>
           <p>
-            <!-- {{ item.acf.contents }} -->
+            {{ item.acf.contents }}
           </p>
         </li>
       </ul>
@@ -47,3 +47,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.contents {
+  & .contents__title {
+    color: var(--main-text-color);
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+</style>
