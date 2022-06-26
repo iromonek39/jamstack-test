@@ -136,9 +136,9 @@ export default {
     & .news__label {
       display: block;
       padding: 8px 24px;
-      border: 1px solid #00C675;
+      border: 1px solid var(--main-text-color);
       border-radius: 25px;
-      color: #00C675;
+      color: var(--main-text-color);
       font-size: 14px;
       font-weight: bold;
     }
@@ -146,7 +146,7 @@ export default {
   & .news__body {
     line-height: 1.5;
     & .news__text {
-      color: #00C675;
+      color: var(--main-text-color);
       font-size: 14px;
       font-weight: bold;
     }
