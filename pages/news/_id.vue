@@ -28,7 +28,7 @@ h1 {
 }
 span {
   display: inline-block;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   padding: 8px 12px;
   border: 1px solid #000;
   border-radius: 20px;
