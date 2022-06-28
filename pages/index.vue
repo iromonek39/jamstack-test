@@ -8,36 +8,18 @@
       </h2>
       <div class="news__contents">
         <ul class="news__list">
-          <li class="news__item">
+          <li
+            v-for="item in news.data"
+            :key="item.id"
+            class="news__item"
+            @click="linkToNewsItem(item)">
             <div class="news__head">
-              <time class="news__date">2022.06.24 Thu</time>
-              <span class="news__label">新着</span>
+              <time class="news__date">{{ $dayjs(item.updatedAt).locale('ja').format('YYYY-MM-DD (dd)') }}</time>
+              <span class="news__label">{{ item.category }}</span>
             </div>
             <div class="news__body">
               <p class="news__text">
-                ニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュース
-              </p>
-            </div>
-          </li>
-          <li class="news__item">
-            <div class="news__head">
-              <time class="news__date">2022.06.24 Thu</time>
-              <span class="news__label">新着</span>
-            </div>
-            <div class="news__body">
-              <p class="news__text">
-                ニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュース
-              </p>
-            </div>
-          </li>
-          <li class="news__item">
-            <div class="news__head">
-              <time class="news__date">2022.06.24 Thu</time>
-              <span class="news__label">新着</span>
-            </div>
-            <div class="news__body">
-              <p class="news__text">
-                ニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュースニュース
+                {{ item.title }}
               </p>
             </div>
           </li>
@@ -79,8 +61,64 @@ export default {
   //     news: news.data
   //   }
   // },
+  data () {
+    return {
+      now: '',
+      news: {
+        total: 3,
+        data: [
+          {
+            id: 1,
+            title: 'テストタイトル',
+            createdAt: '2020-11-01T00:00:00+09:00',
+            updatedAt: '2020-11-01T00:00:00+09:00',
+            body: '本文本文本文本文本文本文本文本文本文本文本文',
+            category: 'latest',
+            thumbnails: {
+              large: 'https://source.unsplash.com/9Ts7SGQmIuQ',
+              middle: 'https://source.unsplash.com/9Ts7SGQmIuQ',
+              small: 'https://source.unsplash.com/9Ts7SGQmIuQ',
+              alt: 'テストタイトル'
+            }
+          },
+          {
+            id: 2,
+            title: 'テストタイトル2',
+            createdAt: '2021-01-10T07:30:20+09:00',
+            updatedAt: '2021-01-10T07:30:20+09:00',
+            body: '本文本文本文本文本文本文本文本文本文本文本文222222',
+            category: 'information',
+            thumbnails: {
+              large: 'https://source.unsplash.com/k8oM2_ZT1kQ',
+              middle: 'https://source.unsplash.com/k8oM2_ZT1kQ',
+              small: 'https://source.unsplash.com/k8oM2_ZT1kQ',
+              alt: 'テストタイトル2'
+            }
+          },
+          {
+            id: 3,
+            title: 'テストタイトル3',
+            createdAt: '2015-01-10T07:30:20+09:00',
+            updatedAt: '2015-01-10T07:30:20+09:00',
+            body: '本文本文本文本文本文本文本文本文本文本文本文3333333',
+            category: 'release',
+            thumbnails: {
+              large: 'https://source.unsplash.com/Gp34PCSEbt8',
+              middle: 'https://source.unsplash.com/Gp34PCSEbt8',
+              small: 'https://source.unsplash.com/Gp34PCSEbt8',
+              alt: 'テストタイトル3'
+            }
+          }
+        ]
+      }
+    }
+  },
   computed: {
   },
+  // created () {
+  //   console.log(this.$dayjs())
+  //   this.now = this.$dayjs().format('YYYY-MM-DD')
+  // },
   methods: {
     ...mapActions('api', ['updateNewsItem']),
     linkToNewsItem (item) {
