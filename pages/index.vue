@@ -14,7 +14,7 @@
             class="news__item"
             @click="linkToNewsItem(item)">
             <div class="news__head">
-              <time class="news__date">{{ $dayjs(item.updatedAt).locale('ja').format('YYYY-MM-DD (dd)') }}</time>
+              <time class="news__date">{{ $dayjs(item.updatedAt).locale('ja').format('YYYY.MM.DD (dd)') }}</time>
               <span class="news__label">{{ item.category }}</span>
             </div>
             <div class="news__body">
