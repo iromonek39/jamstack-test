@@ -46,24 +46,58 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import linkTo from '@/mixins/linkTo.mixin.js'
 
 export default {
   name: 'IndexPage',
   mixins: [linkTo],
-  // async asyncData ({ $axios }) {
-  //   // const article = await $axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post')
-  //   // const news = await $axios.get('http://localhost/wp-test/nuxt2/wp-json/acf/v3/news')
-  //   const news = await $axios.get('http://192.168.33.10/wp-json/wp/api/post') // windows
-  //   return {
-  //     // article,
-  //     news: news.data
-  //   }
-  // },
+  async asyncData ({ $axios }) {
+    // const article = await $axios.get('http://localhost/wp-test/nuxt2/wp-json/wp/api/post')
+    // const news = await $axios.get('http://localhost/wp-test/nuxt2/wp-json/acf/v3/news')
+    // const news = await $axios.get('http://192.168.33.10/wp-json/wp/api/post') // windows
+    const faq = await $axios.$get('http://192.168.33.10/wp-json/acf/v3/faq') // windows
+    return {
+      faq
+      // article,
+      // news: news.data
+    }
+  },
   data () {
     return {
       now: '',
+      faq: {
+        data: [
+          {
+            id: 1,
+            question: '質問内容',
+            answerHead: '回答見出し',
+            answerBody: 'テキストテキストテキストテキストテキストテキスト',
+            isTopDisplay: true
+          },
+          {
+            id: 2,
+            question: '質問内容',
+            answerHead: '回答見出し',
+            answerBody: 'テキストテキストテキストテキストテキストテキスト',
+            isTopDisplay: true
+          },
+          {
+            id: 3,
+            question: '質問内容',
+            answerHead: '回答見出し',
+            answerBody: 'テキストテキストテキストテキストテキストテキスト',
+            isTopDisplay: false
+          },
+          {
+            id: 4,
+            question: '質問内容',
+            answerHead: '回答見出し',
+            answerBody: 'テキストテキストテキストテキストテキストテキスト',
+            isTopDisplay: true
+          }
+        ]
+      },
       news: {
         total: 3,
         data: [
@@ -110,17 +144,48 @@ export default {
             }
           }
         ]
+      },
+      column: {
+        data: [
+          {
+            thumbnail: 'https://source.unsplash.com/Gp34PCSEbt8',
+            category: 'トレーニング',
+            tags: ['変形膝関節症', '腰椎'],
+            title: 'タイトルタイトルタイトルタイトルタイトル',
+            body: 'テキストテキストテキストテキストテキストテキストテキスト'
+          },
+          {
+            thumbnail: 'https://source.unsplash.com/Gp34PCSEbt8',
+            category: 'トレーニング',
+            tags: ['変形膝関節症', '腰椎'],
+            title: 'タイトルタイトルタイトルタイトルタイトル',
+            body: 'テキストテキストテキストテキストテキストテキストテキスト'
+          },
+          {
+            thumbnail: 'https://source.unsplash.com/Gp34PCSEbt8',
+            category: 'トレーニング',
+            tags: ['変形膝関節症', '腰椎'],
+            title: 'タイトルタイトルタイトルタイトルタイトル',
+            body: 'テキストテキストテキストテキストテキストテキストテキスト'
+          }
+        ]
       }
     }
   },
-  computed: {
+  async fetch ({ store, $axios }) {
+    const data = await $axios.$get('http://192.168.33.10/wp-json/wp/api/post')
+    // const { data } = await $axios.get('http://192.168.33.10/wp-json/wp/api/post')
+    await store.commit('api/setApi', data)
   },
-  // created () {
-  //   console.log(this.$dayjs())
-  //   this.now = this.$dayjs().format('YYYY-MM-DD')
-  // },
+  computed: {
+    ...mapState('api', ['apiData'])
+  },
+  created () {
+    // console.log(this.$dayjs())
+    // this.now = this.$dayjs().format('YYYY-MM-DD')
+  },
   methods: {
-    ...mapActions('api', ['updateNewsItem']),
+    ...mapActions('api', ['updateNewsItem', 'getApi']),
     linkToNewsItem (item) {
       this.updateNewsItem(item)
       this.$router.push(`/news/${item.id}`)
