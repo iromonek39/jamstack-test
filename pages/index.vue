@@ -31,10 +31,19 @@
       <div class="question">
         <ul class="question__list">
           <li
-            v-for="item in faq"
+            v-for="(item, index) in faq"
             :key="item.acf.question + '-' + item.acf.id"
-            class="question__item">
-            Q {{ item.acf.question }}
+            class="question__item"
+            @click="isOpen(index)">
+            <div class="question__inner">
+              <div class="question__inner-left">
+                <p class="question__q">Q</p>
+                <p class="question__title">{{ item.acf.question }}</p>
+              </div>
+              <div class="question__inner-right">
+                <div class="cross" />
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -67,6 +76,9 @@ export default {
     // const news = await $axios.get('http://localhost/wp-test/nuxt2/wp-json/acf/v3/news')
     // const news = await $axios.get('http://192.168.33.10/wp-json/wp/api/post') // windows
     const faq = await $axios.$get('http://192.168.33.10/wp-json/acf/v3/faq') // windows
+    faq.forEach(item => {
+      item.acf.openFlg = false
+    })
     return {
       faq
       // article,
@@ -214,6 +226,10 @@ export default {
     linkToNewsItem (item) {
       this.updateNewsItem(item)
       this.$router.push(`/news/${item.id}`)
+    },
+    isOpen (key) {
+      this.faq[key].acf.openFlg = !this.faq[key].acf.openFlg
+      console.log(this.faq)
     }
   }
 }
@@ -296,5 +312,41 @@ export default {
 .question {
   max-width: 1100px;
   margin: 0 auto;
+  & .question__list {
+    width: 100%;
+  }
+  & .question__item {
+    margin-bottom: 20px;
+    padding: 15px 30px;
+    background: #dfebe6;
+    border-radius: 5px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  & .question__inner {
+    display: flex;
+    justify-content: space-between;
+    & .question__inner-left {
+      display: flex;
+    }
+  }
+  & .cross {
+    position: relative;
+    width: 3px;
+    height: 19px;
+    background: #009875;
+  }
+
+  & .cross::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 19px;
+    height: 3px;
+    background: #009875;
+  }
 }
 </style>
