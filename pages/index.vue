@@ -28,6 +28,16 @@
           <span>More ...</span>
         </div>
       </div>
+      <div class="question">
+        <ul class="question__list">
+          <li
+            v-for="item in faq"
+            :key="item.acf.question + '-' + item.acf.id"
+            class="question__item">
+            Q {{ item.acf.question }}
+          </li>
+        </ul>
+      </div>
       <!-- <ul>
         <li
           v-for="item in news"
@@ -65,39 +75,54 @@ export default {
   },
   data () {
     return {
-      now: '',
-      faq: {
-        data: [
-          {
-            id: 1,
-            question: '質問内容',
-            answerHead: '回答見出し',
-            answerBody: 'テキストテキストテキストテキストテキストテキスト',
-            isTopDisplay: true
-          },
-          {
-            id: 2,
-            question: '質問内容',
-            answerHead: '回答見出し',
-            answerBody: 'テキストテキストテキストテキストテキストテキスト',
-            isTopDisplay: true
-          },
-          {
-            id: 3,
-            question: '質問内容',
-            answerHead: '回答見出し',
-            answerBody: 'テキストテキストテキストテキストテキストテキスト',
-            isTopDisplay: false
-          },
-          {
-            id: 4,
-            question: '質問内容',
-            answerHead: '回答見出し',
-            answerBody: 'テキストテキストテキストテキストテキストテキスト',
-            isTopDisplay: true
+      data: [
+        {
+          id: 1111,
+          acf: {
+            title: 'hogehoge',
+            body: 'ぼでぃぼでぃ'
           }
-        ]
-      },
+        },
+        {
+          id: 2222,
+          acf: {
+            title: 'hogehoge',
+            body: 'ぼでぃぼでぃ'
+          }
+        }
+      ],
+      // faq: {
+      //   data: [
+      //     {
+      //       id: 1,
+      //       question: '質問内容',
+      //       answerHead: '回答見出し',
+      //       answerBody: 'テキストテキストテキストテキストテキストテキスト',
+      //       isTopDisplay: true
+      //     },
+      //     {
+      //       id: 2,
+      //       question: '質問内容',
+      //       answerHead: '回答見出し',
+      //       answerBody: 'テキストテキストテキストテキストテキストテキスト',
+      //       isTopDisplay: true
+      //     },
+      //     {
+      //       id: 3,
+      //       question: '質問内容',
+      //       answerHead: '回答見出し',
+      //       answerBody: 'テキストテキストテキストテキストテキストテキスト',
+      //       isTopDisplay: false
+      //     },
+      //     {
+      //       id: 4,
+      //       question: '質問内容',
+      //       answerHead: '回答見出し',
+      //       answerBody: 'テキストテキストテキストテキストテキストテキスト',
+      //       isTopDisplay: true
+      //     }
+      //   ]
+      // },
       news: {
         total: 3,
         data: [
@@ -266,5 +291,10 @@ export default {
       }
     }
   }
+}
+
+.question {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 </style>
