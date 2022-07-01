@@ -33,15 +33,27 @@
           <li
             v-for="(item, index) in faq"
             :key="item.acf.question + '-' + item.acf.id"
-            class="question__item"
-            @click="isOpen(index)">
-            <div class="question__inner">
+            class="question__item">
+            <div
+              class="question__inner"
+              @click="isOpen(index)">
               <div class="question__inner-left">
                 <p class="question__q">Q</p>
                 <p class="question__title">{{ item.acf.question }}</p>
               </div>
               <div class="question__inner-right">
                 <div class="cross" />
+              </div>
+            </div>
+            <div
+              v-if="item.acf.openFlg"
+              class="question__main">
+              <div class="question__head">
+                <p class="question__a">Q</p>
+                <p class="question__head-text">{{ item.acf.answerHead }}</p>
+              </div>
+              <div class="question__body">
+                <p class="question__body-text">{{ item.acf.answerBody }}</p>
               </div>
             </div>
           </li>
@@ -317,7 +329,7 @@ export default {
   }
   & .question__item {
     margin-bottom: 20px;
-    padding: 15px 30px;
+    padding: 0 20px;
     background: #dfebe6;
     border-radius: 5px;
     &:hover {
@@ -326,6 +338,8 @@ export default {
   }
   & .question__inner {
     display: flex;
+    padding: 15px 0;
+    align-items: center;
     justify-content: space-between;
     & .question__inner-left {
       display: flex;
@@ -347,6 +361,16 @@ export default {
     width: 19px;
     height: 3px;
     background: #009875;
+  }
+
+  & .question__main {
+    padding: 20px 30px 34px 0;
+    border-top: 1px solid #C8DED5;
+  }
+  & .question__head {
+    display: flex;
+    padding-bottom: 4px;
+    align-items: center;
   }
 }
 </style>
