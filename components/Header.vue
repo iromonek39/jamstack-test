@@ -28,8 +28,8 @@
           </li>
           <li
             class="nav__item"
-            @click="linkTo('news')">
-            news
+            @click="linkTo('grid')">
+            grid
           </li>
           <li
             class="nav__item"
