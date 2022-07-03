@@ -5,7 +5,8 @@ export const state = () => ({
   shopList: {},
   sliderList: {},
   newsList: {},
-  newsDetail: {}
+  newsDetail: {},
+  faq: {}
 })
 
 export const mutations = {
@@ -29,6 +30,9 @@ export const mutations = {
   },
   setNewsDetail (state, payload) {
     state.newsDetail = payload
+  },
+  setFaq (state, payload) {
+    state.faq = payload
   }
 }
 
@@ -90,5 +94,12 @@ export const actions = {
   },
   updateNewsItem ({ commit }, obj) {
     commit('setNewsDetail', obj)
+  },
+  async getFaq ({ commit }) {
+    const { data } = await this.$axios.get('http://192.168.33.10/wp-json/acf/v3/faq')
+    data.forEach(item => {
+      item.acf.openFlg = false
+    })
+    commit('setFaq', data)
   }
 }

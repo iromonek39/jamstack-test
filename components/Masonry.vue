@@ -49,109 +49,109 @@ export default {
           tags: 'partner'
         },
         {
-          id: 1,
+          id: 2,
           imgUrl: 'https://source.unsplash.com/EMmCc9xRBbw',
           type: 'tall',
           tags: 'guest'
         },
         {
-          id: 1,
+          id: 3,
           imgUrl: 'https://source.unsplash.com/k8oM2_ZT1kQ',
           type: 'wide',
           tags: 'guest'
         },
         {
-          id: 2,
+          id: 4,
           imgUrl: 'https://source.unsplash.com/Gp34PCSEbt8',
           type: 'tall',
           tags: 'partner'
         },
         {
-          id: 3,
+          id: 5,
           imgUrl: 'https://source.unsplash.com/9Ts7SGQmIuQ',
           type: '',
           tags: 'test'
         },
         {
-          id: 4,
+          id: 6,
           imgUrl: 'https://source.unsplash.com/FGtKPfiiVJI',
           type: 'big',
           tags: 'test'
         },
         {
-          id: 5,
+          id: 7,
           imgUrl: 'https://source.unsplash.com/4W_PYGedTXw',
           type: 'big',
           tags: 'guest'
         },
         {
-          id: 6,
+          id: 8,
           imgUrl: 'https://source.unsplash.com/TZX7ZAXiTA0',
           type: '',
           tags: 'test'
         },
         {
-          id: 7,
+          id: 9,
           imgUrl: 'https://source.unsplash.com/sTYMA8wI2Ik',
           type: 'tall',
           tags: 'partner'
         },
         {
-          id: 8,
+          id: 10,
           imgUrl: 'https://source.unsplash.com/GjiGMxRuZ3A',
           type: 'wide',
           tags: 'guest'
         },
         {
-          id: 1,
+          id: 11,
           imgUrl: 'https://source.unsplash.com/k8oM2_ZT1kQ',
           type: 'wide',
           tags: 'guest'
         },
         {
-          id: 2,
+          id: 12,
           imgUrl: 'https://source.unsplash.com/Gp34PCSEbt8',
           type: 'tall',
           tags: 'partner'
         },
         {
-          id: 3,
+          id: 13,
           imgUrl: 'https://source.unsplash.com/9Ts7SGQmIuQ',
           type: '',
           tags: 'test'
         },
         {
-          id: 4,
+          id: 14,
           imgUrl: 'https://source.unsplash.com/FGtKPfiiVJI',
           type: 'big',
           tags: 'test'
         },
         {
-          id: 5,
+          id: 15,
           imgUrl: 'https://source.unsplash.com/4W_PYGedTXw',
           type: 'big',
           tags: 'guest'
         },
         {
-          id: 6,
+          id: 16,
           imgUrl: 'https://source.unsplash.com/TZX7ZAXiTA0',
           type: '',
           tags: 'test'
         },
         {
-          id: 7,
+          id: 17,
           imgUrl: 'https://source.unsplash.com/sTYMA8wI2Ik',
           type: 'tall',
           tags: 'partner'
         },
         {
-          id: 8,
+          id: 18,
           imgUrl: 'https://source.unsplash.com/GjiGMxRuZ3A',
           type: 'wide',
           tags: 'guest'
         },
         {
-          id: 8,
+          id: 19,
           imgUrl: 'https://source.unsplash.com/H8B0UcMzDCA',
           type: 'wide',
           tags: 'partner'
@@ -207,8 +207,10 @@ export default {
 
 .grid-wrapper {
   display: grid;
+  max-width: 940px;
+  margin: 0 auto;
   grid-gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-auto-rows: 200px;
   grid-auto-flow: dense;
 }

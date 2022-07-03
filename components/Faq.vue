@@ -92,6 +92,8 @@ export default {
     }
   },
   async fetch () {
+    // 引数に何も入れなくてもthisでアクセスできる
+    await console.log(this.$store)
     const faqData = await this.$axios.$get('http://192.168.33.10/wp-json/acf/v3/faq')
     faqData.forEach(item => {
       item.acf.openFlg = false
