@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <Slider/> -->
-    <div class="news section">
+    <div class="news">
       <h2 class="section__title-wrapper">
         <p class="section__sub-title">ニュース</p>
         <p class="section__title">NEWS</p>
@@ -28,37 +28,6 @@
           <span>More ...</span>
         </div>
       </div>
-      <div class="question">
-        <ul class="question__list">
-          <li
-            v-for="(item, index) in faq"
-            :key="item.acf.question + '-' + item.acf.id"
-            class="question__item">
-            <div
-              class="question__inner"
-              @click="isOpen(index)">
-              <div class="question__inner-left">
-                <p class="question__q">Q</p>
-                <p class="question__title">{{ item.acf.question }}</p>
-              </div>
-              <div class="question__inner-right">
-                <div class="cross" />
-              </div>
-            </div>
-            <div
-              v-if="item.acf.openFlg"
-              class="question__main">
-              <div class="question__head">
-                <p class="question__a">Q</p>
-                <p class="question__head-text">{{ item.acf.answerHead }}</p>
-              </div>
-              <div class="question__body">
-                <p class="question__body-text">{{ item.acf.answerBody }}</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
       <!-- <ul>
         <li
           v-for="item in news"
@@ -73,6 +42,38 @@
         </li>
       </ul> -->
     </div>
+    <div class="question">
+      <ul class="question__list">
+        <li
+          v-for="(item, index) in faq"
+          :key="item.acf.question + '-' + item.acf.id"
+          class="question__item">
+          <div
+            class="question__inner"
+            @click="isOpen(index)">
+            <div class="question__inner-left">
+              <p class="question__q">Q</p>
+              <p class="question__title">{{ item.acf.question }}</p>
+            </div>
+            <div class="question__inner-right">
+              <div class="cross" />
+            </div>
+          </div>
+          <div
+            v-if="item.acf.openFlg"
+            class="question__main">
+            <div class="question__head">
+              <p class="question__a">Q</p>
+              <p class="question__head-text">{{ item.acf.answerHead }}</p>
+            </div>
+            <div class="question__body">
+              <p class="question__body-text">{{ item.acf.answerBody }}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <Masonry />
   </div>
 </template>
 
@@ -221,11 +222,11 @@ export default {
       }
     }
   },
-  async fetch ({ store, $axios }) {
-    const data = await $axios.$get('http://192.168.33.10/wp-json/wp/api/post')
-    // const { data } = await $axios.get('http://192.168.33.10/wp-json/wp/api/post')
-    await store.commit('api/setApi', data)
-  },
+  // async fetch ({ store, $axios }) {
+  //   const data = await $axios.$get('http://192.168.33.10/wp-json/wp/api/post')
+  //   // const { data } = await $axios.get('http://192.168.33.10/wp-json/wp/api/post')
+  //   await store.commit('api/setApi', data)
+  // },
   computed: {
     ...mapState('api', ['apiData'])
   },
