@@ -120,22 +120,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.section {
-  & .section__title-wrapper {
-    margin-bottom: 48px;
-    color: var(--main-text-color);
-    font-weight: bold;
-    text-align: center;
-  }
-  & .section__sub-title {
-    margin-bottom: 8px;
-    font-size: 16px;
-  }
-  & .section__title {
-    font-size: 40px;
-  }
-}
-
 .news {
   & .news__contents {
     max-width: 680px;

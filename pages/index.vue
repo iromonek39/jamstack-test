@@ -1,7 +1,13 @@
 <template>
   <div>
     <!-- <Slider/> -->
-    <News :news-data="data" />
+    <div class="section">
+      <h2 class="section__title-wrapper">
+        <p class="section__sub-title">ニュース</p>
+        <p class="section__title">NEWS</p>
+      </h2>
+      <News :news-data="data" />
+    </div>
     <!-- <Faq /> -->
     <!-- <Masonry /> -->
   </div>
@@ -83,4 +89,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.section {
+  & .section__title-wrapper {
+    margin-bottom: 48px;
+    color: var(--main-text-color);
+    font-weight: bold;
+    text-align: center;
+  }
+  & .section__sub-title {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  & .section__title {
+    font-size: 40px;
+  }
+}
 </style>
