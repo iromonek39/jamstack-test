@@ -38,6 +38,12 @@ import linkTo from '@/mixins/linkTo.mixin.js'
 export default {
   name: 'News',
   mixins: [linkTo],
+  props: {
+    newsData: {
+      type: Array,
+      default: () => {}
+    }
+  },
   async asyncData ({ $axios }) {
   },
   data () {
