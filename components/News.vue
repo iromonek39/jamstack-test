@@ -40,7 +40,7 @@ export default {
   mixins: [linkTo],
   props: {
     newsData: {
-      type: Array,
+      type: Object,
       default: () => {}
     }
   },
