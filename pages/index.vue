@@ -20,8 +20,8 @@ export default {
   name: 'IndexPage',
   mixins: [linkTo],
   async asyncData ({ $axios }) {
-    const data = await $axios.$get('http://localhost:8080/wp-json/wp/api/post') // mac
-    // const data = await $axios.$get('http://192.168.33.10/wp-json/wp/api/post') // windows
+    // const data = await $axios.$get('http://localhost:8080/wp-json/wp/api/post') // mac
+    const data = await $axios.$get('http://192.168.33.10/wp-json/wp/api/news') // windows
     console.log(data)
     return {
       data

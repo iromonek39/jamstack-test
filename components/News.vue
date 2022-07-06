@@ -1,14 +1,10 @@
 <template>
   <div>
-    <div class="news section">
-      <h2 class="section__title-wrapper">
-        <p class="section__sub-title">ニュース</p>
-        <p class="section__title">NEWS</p>
-      </h2>
+    <div class="news">
       <div class="news__contents">
         <ul class="news__list">
           <li
-            v-for="item in news.data"
+            v-for="item in newsData.data"
             :key="item.id"
             class="news__item"
             @click="linkToNewsItem(item)">

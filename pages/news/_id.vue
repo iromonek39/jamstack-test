@@ -1,5 +1,8 @@
 <template>
   <div class="newsDetail">
+    <img
+      :src="newsDetail.thumbnails"
+      :alt="newsDetail.title">
     <h1>{{ newsDetail.title }}</h1>
     <span>{{ newsDetail.category }}</span>
     <p>{{ newsDetail.body }}</p>
