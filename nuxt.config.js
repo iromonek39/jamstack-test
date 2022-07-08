@@ -74,4 +74,12 @@ export default {
   build: {
     transpile: ['gsap']
   },
+
+  extendRoutes (routes, resolve) {
+    routes.push({
+      path: '/page/:p',
+      component: resolve(__dirname, 'pages/index.vue'),
+      name: 'page'
+    })
+  }
 }

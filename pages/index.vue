@@ -6,8 +6,21 @@
         <p class="section__sub-title">ニュース</p>
         <p class="section__title">NEWS</p>
       </h2>
-      <News :news-data="data" />
+      <!-- <News :news-data="data" /> -->
     </div>
+    <!-- <Pagenation
+      :total-count="20"
+      :per-page="5"/> -->
+
+    <ul>
+      <li
+        v-for="item in data"
+        :key="item.id">
+        <nuxt-link :to="`/${item.id}`">{{ item.title }}</nuxt-link>
+      </li>
+    </ul>
+
+    <p>ページネーション</p>
     <!-- <Faq /> -->
     <!-- <Masonry /> -->
   </div>
@@ -19,9 +32,11 @@ import linkTo from '@/mixins/linkTo.mixin.js'
 export default {
   name: 'IndexPage',
   mixins: [linkTo],
-  async asyncData ({ $axios }) {
-    // const data = await $axios.$get('http://localhost:8080/wp-json/wp/api/post') // mac
-    const data = await $axios.$get('http://192.168.33.10/wp-json/wp/api/news') // windows
+  async asyncData ({ params, $axios }) {
+    const page = params.p || '1'
+    const limit = 10
+    const { data } = await $axios.$get(`http://localhost:8080/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // mac
+    // const data = await $axios.$get('http://192.168.33.10/wp-json/wp/api/post') // windows
     console.log(data)
     return {
       data
