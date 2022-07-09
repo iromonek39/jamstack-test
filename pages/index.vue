@@ -41,7 +41,7 @@ export default {
     const data = await $axios.$get(`http://localhost:8080/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // mac
     // const { data } = await $axios.$get(`http://192.168.33.10/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // windows
     return {
-      data,
+      ...data,
       page,
       pager: [...Array(Math.ceil(data.total / limit)).keys()]
     }
