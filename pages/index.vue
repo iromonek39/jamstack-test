@@ -11,6 +11,9 @@
     <!-- <Pagenation
       :total-count="20"
       :per-page="5"/> -->
+    <Pagenation
+      :pager="pager"
+      :current="Number(page)"/>
 
     <ul>
       <li
@@ -35,31 +38,32 @@ export default {
   async asyncData ({ params, $axios }) {
     const page = params.p || '1'
     const limit = 10
-    const { data } = await $axios.$get(`http://localhost:8080/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // mac
-    // const data = await $axios.$get('http://192.168.33.10/wp-json/wp/api/post') // windows
-    console.log(data)
+    const data = await $axios.$get(`http://localhost:8080/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // mac
+    // const { data } = await $axios.$get(`http://192.168.33.10/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // windows
     return {
-      data
+      data,
+      page,
+      pager: [...Array(Math.ceil(data.total / limit)).keys()]
     }
   },
   data () {
     return {
-      data: [
-        {
-          id: 1111,
-          acf: {
-            title: 'hogehoge',
-            body: 'ぼでぃぼでぃ'
-          }
-        },
-        {
-          id: 2222,
-          acf: {
-            title: 'hogehoge',
-            body: 'ぼでぃぼでぃ'
-          }
-        }
-      ],
+      // data: [
+      //   {
+      //     id: 1111,
+      //     acf: {
+      //       title: 'hogehoge',
+      //       body: 'ぼでぃぼでぃ'
+      //     }
+      //   },
+      //   {
+      //     id: 2222,
+      //     acf: {
+      //       title: 'hogehoge',
+      //       body: 'ぼでぃぼでぃ'
+      //     }
+      //   }
+      // ],
       column: {
         data: [
           {

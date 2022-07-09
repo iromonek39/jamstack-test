@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -63,23 +65,34 @@ export default {
 
   generate: {
     fallback: true,
-    subFolders: true
+    subFolders: true,
+    async routes () {
+      const limit = 10
+      const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i)
+      const pages = await axios
+        .get('http://localhost:8080/wp-json/wp/api/post')
+        .then(res => {
+          return range(1, Math.ceil(res.data.total / limit)).map(p => ({
+            route: `page/${p}`
+          }))
+        })
+      return pages
+    }
   },
 
   router: {
-    base: '/'
+    base: '/',
+    extendRoutes (routes, resolve) {
+      routes.push({
+        path: '/page/:p',
+        component: resolve(__dirname, 'pages/index.vue'),
+        name: 'page'
+      })
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['gsap']
-  },
-
-  extendRoutes (routes, resolve) {
-    routes.push({
-      path: '/page/:p',
-      component: resolve(__dirname, 'pages/index.vue'),
-      name: 'page'
-    })
   }
 }
