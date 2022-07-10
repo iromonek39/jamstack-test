@@ -73,7 +73,7 @@ export default {
         .get('http://localhost:8080/wp-json/wp/api/post')
         .then(res => {
           return range(1, Math.ceil(res.data.total / limit)).map(p => ({
-            route: `page/${p}`
+            route: `/post/page/${p}`
           }))
         })
       return pages
@@ -84,8 +84,8 @@ export default {
     base: '/',
     extendRoutes (routes, resolve) {
       routes.push({
-        path: '/page/:p',
-        component: resolve(__dirname, 'pages/index.vue'),
+        path: '/post/page/:p',
+        component: resolve(__dirname, 'pages/post/index.vue'),
         name: 'page'
       })
     }

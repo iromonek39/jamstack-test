@@ -3,7 +3,7 @@
     <ul class="pager__list">
       <li
         v-if="current > 1"
-        class="pager__item arrow">
+        class="arrow">
         <nuxt-link :to="getPagePath(current - 1)">
           <img src="@/assets/images/icon-arrow-left.svg" alt="前のページ">
         </nuxt-link>
@@ -44,7 +44,7 @@
       </li>
       <li
         v-if="current < pager.length"
-        class="pager__item arrow">
+        class="arrow">
         <nuxt-link :to="getPagePath(current + 1)">
           <img src="@/assets/images/icon-arrow-right.svg" alt="次のページ">
         </nuxt-link>
@@ -110,7 +110,7 @@ export default {
     //   this.$router.push(`/blog/${pageNum}`)
     // },
     getPagePath (p) {
-      return `/page/${p}`
+      return `/post/page/${p}`
     }
   }
 }
@@ -125,39 +125,37 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 40px 0 0;
-    .pager__item {
-      &.arrow {
-        width: 15px;
-        height: 15px;
-        margin: 4px 12px;
-      }
-      .pager__num {
-        width: 40px;
-        height: 40px;
-        border-radius: 5px;
-        margin: 4px;
-        &.active {
-          background-color: var(--color-blue);
-          a,
-          a:hover {
-            color: #fff;
-          }
-        }
-        a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
-          color: #000;
-          &:hover {
-            color: #333;
-          }
+    .arrow {
+      width: 15px;
+      height: 15px;
+      margin: 4px 12px;
+    }
+    .pager__num {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      margin: 4px;
+      &.active {
+        background-color: #000;
+        a,
+        a:hover {
+          color: #fff;
         }
       }
-      .pager__omission {
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
         color: #000;
-        margin: 4px 12px;
+        &:hover {
+          color: #333;
+        }
       }
+    }
+    .pager__omission {
+      color: #000;
+      margin: 4px 12px;
     }
   }
 }

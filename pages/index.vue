@@ -8,22 +8,7 @@
       </h2>
       <!-- <News :news-data="data" /> -->
     </div>
-    <!-- <Pagenation
-      :total-count="20"
-      :per-page="5"/> -->
-    <Pagenation
-      :pager="pager"
-      :current="Number(page)"/>
 
-    <ul>
-      <li
-        v-for="item in data"
-        :key="item.id">
-        <nuxt-link :to="`/${item.id}`">{{ item.title }}</nuxt-link>
-      </li>
-    </ul>
-
-    <p>ページネーション</p>
     <!-- <Faq /> -->
     <!-- <Masonry /> -->
   </div>
@@ -36,15 +21,15 @@ export default {
   name: 'IndexPage',
   mixins: [linkTo],
   async asyncData ({ params, $axios }) {
-    const page = params.p || '1'
-    const limit = 10
-    const data = await $axios.$get(`http://localhost:8080/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // mac
-    // const { data } = await $axios.$get(`http://192.168.33.10/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // windows
-    return {
-      ...data,
-      page,
-      pager: [...Array(Math.ceil(data.total / limit)).keys()]
-    }
+    // const page = params.p || '1'
+    // const limit = 10
+    // const data = await $axios.$get(`http://localhost:8080/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // mac
+    // // const { data } = await $axios.$get(`http://192.168.33.10/wp-json/wp/api/post?limit=${limit}&offset=${page}`) // windows
+    // return {
+    //   ...data,
+    //   page,
+    //   pager: [...Array(Math.ceil(data.total / limit)).keys()]
+    // }
   },
   data () {
     return {

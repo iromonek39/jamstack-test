@@ -13,6 +13,11 @@
         <ul class="nav__list">
           <li
             class="nav__item"
+            @click="linkTo('post')">
+            post
+          </li>
+          <li
+            class="nav__item"
             @click="linkTo('gsap-test')">
             gsaptest
           </li>
