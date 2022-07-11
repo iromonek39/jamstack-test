@@ -42,10 +42,10 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'Blog',
-  async asyncData ({ params, $axios, store }) {
+  async asyncData ({ params, $axios, $config, store }) {
     const page = params.p || '1'
     const limit = 9
-    const data = await $axios.$get(`http://localhost:8080/wp-json/wp/api/post?limit=${limit}&offset=${page}`)
+    const data = await $axios.$get(`${$config.baseURL}/wp-json/wp/api/post?limit=${limit}&offset=${page}`)
     // await store.commit('blog/setBlogData', data)
     return {
       ...data,
