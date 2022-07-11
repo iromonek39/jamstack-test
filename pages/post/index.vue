@@ -12,22 +12,23 @@
       <li
         v-for="item in data"
         :key="item.id"
-        class="blog__item"
-        @click="toBlogDetailPage(item)">
-        <img
-          v-if="item.thumbnail"
-          :src="item.thumbnail"
-          :alt="item.title">
-        <img
-          v-else
-          src="@/assets/images/dummy600_400.jpeg"
-          alt="">
-        <p class="blog__title">
-          {{ item.title }}
-        </p>
-        <span class="blog__date">
-          {{ $dayjs(item.date).locale('ja').format('YYYY.MM.DD') }}
-        </span>
+        class="blog__item">
+        <nuxt-link :to="`/post/${item.id}`">
+          <img
+            v-if="item.thumbnail"
+            :src="item.thumbnail"
+            :alt="item.title">
+          <img
+            v-else
+            src="@/assets/images/dummy600_400.jpeg"
+            alt="">
+          <p class="blog__title">
+            {{ item.title }}
+          </p>
+          <span class="blog__date">
+            {{ $dayjs(item.date).locale('ja').format('YYYY.MM.DD') }}
+          </span>
+        </nuxt-link>
       </li>
     </ul>
 
