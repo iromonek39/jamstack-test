@@ -20,17 +20,14 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import '@/assets/css/style.css'
 
 export default {
-  name: 'PostDetail',
+  name: 'IndexPage',
   async asyncData ({ params, $axios, $config, payload }) {
-    if (payload) return { blogDetailData: payload }
-    else {
-      return {
-        blogDetailData: await $axios.$get(`${$config.baseURL}/wp-json/wp/api/post/${params.id}`)
-      }
+    const blogDetailData = await $axios.$get(`${$config.baseURL}/wp-json/wp/api/post/${params.id}`)
+    return {
+      blogDetailData
     }
   },
   data () {

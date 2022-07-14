@@ -75,7 +75,7 @@ export default {
     devtools: true,
     fallback: true,
     subFolders: true,
-    // interval: 100,
+    interval: 100,
     async routes () {
       const routesArr = []
       const limit = 10
