@@ -72,19 +72,31 @@ export default {
   },
 
   generate: {
+    devtools: true,
     fallback: true,
     subFolders: true,
+    // interval: 100,
     async routes () {
+      const routesArr = []
       const limit = 10
       const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i)
       const pages = await axios
         .get('http://localhost:8080/wp-json/wp/api/post')
         .then(res => {
-          return range(1, Math.ceil(res.data.total / limit)).map(p => ({
-            route: `/post/page/${p}`
-          }))
+          range(1, Math.ceil(res.data.total / limit)).map(p => {
+            routesArr.push({
+              route: `/post/page/${p}`,
+              payload: p
+            })
+          })
+          res.data.data.map(item => {
+            routesArr.push({
+              route: `/post/${item.id}`,
+              payload: item
+            })
+          })
         })
-      return pages
+      return routesArr
     }
   },
 
