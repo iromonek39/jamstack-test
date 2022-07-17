@@ -36,7 +36,8 @@ export default {
   plugins: [
     {
       src: "~/plugins/swiper", mode: "client",
-      src: "~/plugins/day", mode: "all"
+      src: "~/plugins/day", mode: "all",
+      src: "~/plugins/vue-rellax"
     },
   ],
 
@@ -50,7 +51,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     // '@nuxtjs/tailwindcss',
     // https://vuetifyjs.com/ja/
-    '@nuxtjs/vuetify'
+    // '@nuxtjs/vuetify'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

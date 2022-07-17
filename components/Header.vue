@@ -23,6 +23,11 @@
           </li>
           <li
             class="nav__item"
+            @click="linkTo('parallax')">
+            parallax
+          </li>
+          <li
+            class="nav__item"
             @click="linkTo('test')">
             filterTest
           </li>

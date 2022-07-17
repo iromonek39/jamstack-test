@@ -1,6 +1,5 @@
 <template>
   <div class="gsap">
-    <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-parallax>
     <div class="area">
       <div class="box gsap-boxA"></div>
     </div>
