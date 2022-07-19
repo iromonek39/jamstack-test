@@ -35,9 +35,9 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {
+      src: "~/plugins/vue-rellax",
       src: "~/plugins/swiper", mode: "client",
-      src: "~/plugins/day", mode: "all",
-      src: "~/plugins/vue-rellax"
+      src: "~/plugins/day", mode: "all"
     },
   ],
 
