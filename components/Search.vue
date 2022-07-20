@@ -30,7 +30,7 @@ export default {
   methods: {
     ...mapActions('api', ['getApi']),
     doSearch (event) {
-      console.log(event)
+      console.log(this)
       if (event.type === 'keydown') {
         if (event.keyCode !== 13) return
       }
@@ -39,9 +39,10 @@ export default {
         this.$emit('searchResults', [])
         this.getApi()
       } else {
-        this.$axios.get(`http://localhost/wp-test/nuxt2/wp-json/wp/api/search/${this.searchText}`)
+        this.$axios.get(`${this.$config.baseURL}/wp-json/wp/api/search/${this.searchText}`)
           .then((res) => {
             console.log(res)
+            this.$router.push('/search')
             this.$emit('searchResults', res.data)
           })
           .catch((err) => {

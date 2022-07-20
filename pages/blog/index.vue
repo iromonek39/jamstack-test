@@ -1,7 +1,7 @@
 <template>
   <div class="blog">
-    <!-- <Search
-      @searchResults="getSearchResults"/> -->
+    <Search
+      @searchResults="getSearchResults"/>
     <!-- <Category /> -->
     <ul class="blog__list">
       <li
