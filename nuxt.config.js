@@ -52,6 +52,7 @@ export default {
     // '@nuxtjs/tailwindcss',
     // https://vuetifyjs.com/ja/
     // '@nuxtjs/vuetify'
+    'nuxt-microcms-module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -117,5 +118,13 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['gsap']
+  },
+
+  microcms: {
+    options: {
+      serviceDomain: "jamstacktestomori",
+      apiKey: "1d7d58cbe3b84c6ba5201ed4cc2418b223b7",
+    },
+    mode: process.env.NODE_ENV === "production" ? "server" : "all",
   }
 }

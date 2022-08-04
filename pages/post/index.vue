@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- <Slider/> -->
+    <Search />
     <div class="section">
       <h2 class="section__title-wrapper">
         <p class="section__sub-title">ブログ</p>
