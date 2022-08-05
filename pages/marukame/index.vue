@@ -23,42 +23,62 @@
               <div class="marukame__head">
                 <div class="marukame__badge-wrapper">
                   <div
+                    v-if="item.cold[0]"
                     class="marukame__temperature"
                     data-type="cold">
+                    {{ item.cold[0] }}
                   </div>
                   <div
+                    v-if="item.takeoutAvailable[0]"
                     class="marukame__badge"
                     data-type="primary">
+                    {{ item.takeoutAvailable[0] }}
                   </div>
                   <div
+                    v-if="item.shopExclusive[0]"
                     class="marukame__badge"
                     data-type="secondary">
+                    {{ item.shopExclusive[0] }}
                   </div>
                 </div>
                 <div class="marukame__name">
-                  <h3></h3>
+                  <h3 class="marukame__name-text">{{ item.name }}</h3>
                 </div>
               </div>
               <div class="marukame__body">
                 <div class="marukame__text">
-                  <p></p>
+                  <p>{{ item.lead }}</p>
+                </div>
+                <div class="marukame__note-list">
+                  <small
+                    v-if="item.priceNotes"
+                    class="marukame__note">
+                    {{ item.priceNotes }}
+                  </small>
                 </div>
                 <div class="marukame__price-wrapper">
-                  <div class="marukame__size">
+                  <div
+                    v-if="item.sizeUnits"
+                    class="marukame__size">
                     <span class="marukame__size-head">サイズ</span>
-                    <span class="marukame__size-item"></span>
+                    <span
+                      v-for="size in item.sizeUnits"
+                      :key="size"
+                      class="marukame__size-item">
+                      {{ size }}
+                    </span>
                   </div>
                   <div class="marukame__price">
-                    <span class="marukame__unit"></span>
-                    <span class="marukame__number"></span>
-                    <span class="marukame__currency"></span>
+                    <span class="marukame__unit">{{ item.price.unit }}</span>
+                    <span class="marukame__number">{{ item.price.number }}</span>
+                    <span class="marukame__currency">{{ item.currency[0] }}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="marukame__circle">
-            <div class="marukame__circle-badge"></div>
+            <div class="marukame__circle-badge">{{ item.limited[0] }}</div>
           </div>
         </nuxt-link>
       </li>
@@ -86,6 +106,9 @@ export default {
 
 <style lang="scss" scoped>
 .marukame {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 120px 0 50px;
   .marukame__wrapper {
     display: grid;
     grid-gap: 32px;
@@ -199,22 +222,21 @@ export default {
         .marukame__badge[data-type=secondary] {
           border-color: #ddd;
         }
-
-        .marukame__name {
-          height: 260px;
-          padding-top: 4px;
-          color: #000;
-          transition: color .17s linear;
-          display: flex;
-          h3 {
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            height: inherit;
-            font-family: Shuei ShogoMincho,serif;
-            -webkit-font-smoothing: antialiased;
-            font-size: 20px;
-            letter-spacing: .05em;
-          }
+      }
+      .marukame__name {
+        height: 260px;
+        padding-top: 4px;
+        color: #000;
+        transition: color .17s linear;
+        display: flex;
+        .marukame__name-text {
+          writing-mode: vertical-rl;
+          text-orientation: upright;
+          height: inherit;
+          font-family: Shuei ShogoMincho,serif;
+          -webkit-font-smoothing: antialiased;
+          font-size: 20px;
+          letter-spacing: .05em;
         }
       }
     }
@@ -236,6 +258,18 @@ export default {
           line-height: 22px;
           letter-spacing: 0;
           white-space: pre-line;
+        }
+      }
+
+      .marukame__note-list {
+        align-self: flex-end;
+        line-height: 1;
+        .marukame__note {
+          font-size: 10px;
+          line-height: 1;
+          &:before {
+            content: "※";
+          }
         }
       }
 
@@ -280,7 +314,7 @@ export default {
       display: inline-flex;
       align-items: center;
       width: 44px;
-      height: 44px;
+      height: 34px;
       color: #fff;
       font-family: Shuei ShogoMincho,serif;
       -webkit-font-smoothing: antialiased;
