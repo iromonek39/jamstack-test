@@ -1,88 +1,100 @@
 <template>
-  <div class="marukame">
-    <ul
-      class="marukame__wrapper"
-      data-col-lg="3"
-      data-col-md="3"
-      data-col-sm="2"
-      data-gap="small">
-      <li
-        v-for="item in contents"
-        :key="item.id"
-        class="marukame__item">
-        <nuxt-link
-          :to="`/marukame/${item.id}`"
-          class="marukame__link">
-          <div class="marukame__inner">
-            <div class="marukame__img">
-              <img
-                :src="item.image.url"
-                :alt="item.name">
-            </div>
-            <div class="marukame__content">
-              <div class="marukame__head">
-                <div class="marukame__badge-wrapper">
-                  <div
-                    v-if="item.cold[0]"
-                    class="marukame__temperature"
-                    data-type="cold">
-                    {{ item.cold[0] }}
+  <div class="wrapper">
+    <div class="menu">
+      <div class="menu__nav">
+        <label class="menu__item">
+          <input type="radio" value="shop">
+          <span class="menu__item-label"></span>
+        </label>
+        <label for="" class="menu__item"></label>
+      </div>
+      <ul class="menu__list"></ul>
+    </div>
+    <div class="marukame">
+      <ul
+        class="marukame__wrapper"
+        data-col-lg="3"
+        data-col-md="3"
+        data-col-sm="2"
+        data-gap="small">
+        <li
+          v-for="item in contents"
+          :key="item.id"
+          class="marukame__item">
+          <nuxt-link
+            :to="`/marukame/${item.id}`"
+            class="marukame__link">
+            <div class="marukame__inner">
+              <div class="marukame__img">
+                <img
+                  :src="item.image.url"
+                  :alt="item.name">
+              </div>
+              <div class="marukame__content">
+                <div class="marukame__head">
+                  <div class="marukame__badge-wrapper">
+                    <div
+                      v-if="item.cold[0]"
+                      class="marukame__temperature"
+                      data-type="cold">
+                      {{ item.cold[0] }}
+                    </div>
+                    <div
+                      v-if="item.takeoutAvailable[0]"
+                      class="marukame__badge"
+                      data-type="primary">
+                      {{ item.takeoutAvailable[0] }}
+                    </div>
+                    <div
+                      v-if="item.shopExclusive[0]"
+                      class="marukame__badge"
+                      data-type="secondary">
+                      {{ item.shopExclusive[0] }}
+                    </div>
                   </div>
-                  <div
-                    v-if="item.takeoutAvailable[0]"
-                    class="marukame__badge"
-                    data-type="primary">
-                    {{ item.takeoutAvailable[0] }}
-                  </div>
-                  <div
-                    v-if="item.shopExclusive[0]"
-                    class="marukame__badge"
-                    data-type="secondary">
-                    {{ item.shopExclusive[0] }}
+                  <div class="marukame__name">
+                    <h3 class="marukame__name-text">{{ item.name }}</h3>
                   </div>
                 </div>
-                <div class="marukame__name">
-                  <h3 class="marukame__name-text">{{ item.name }}</h3>
+                <div class="marukame__body">
+                  <div class="marukame__text">
+                    <p>{{ item.lead }}</p>
+                  </div>
+                  <div class="marukame__note-list">
+                    <small
+                      v-if="item.priceNotes"
+                      class="marukame__note">
+                      {{ item.priceNotes }}
+                    </small>
+                  </div>
+                  <div class="marukame__price-wrapper">
+                    <div
+                      v-if="item.sizeUnits"
+                      class="marukame__size">
+                      <span class="marukame__size-head">サイズ</span>
+                      <span
+                        v-for="size in item.sizeUnits"
+                        :key="size"
+                        class="marukame__size-item">
+                        {{ size }}
+                      </span>
+                    </div>
+                    <div class="marukame__price">
+                      <span class="marukame__unit">{{ item.price.unit }}</span>
+                      <span class="marukame__number">{{ item.price.number }}</span>
+                      <span class="marukame__currency">{{ item.currency[0] }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="marukame__body">
-                <div class="marukame__text">
-                  <p>{{ item.lead }}</p>
-                </div>
-                <div class="marukame__note-list">
-                  <small
-                    v-if="item.priceNotes"
-                    class="marukame__note">
-                    {{ item.priceNotes }}
-                  </small>
-                </div>
-                <div class="marukame__price-wrapper">
-                  <div
-                    v-if="item.sizeUnits"
-                    class="marukame__size">
-                    <span class="marukame__size-head">サイズ</span>
-                    <span
-                      v-for="size in item.sizeUnits"
-                      :key="size"
-                      class="marukame__size-item">
-                      {{ size }}
-                    </span>
-                  </div>
-                  <div class="marukame__price">
-                    <span class="marukame__unit">{{ item.price.unit }}</span>
-                    <span class="marukame__number">{{ item.price.number }}</span>
-                    <span class="marukame__currency">{{ item.currency[0] }}</span>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-          <div class="marukame__circle">
-            <div class="marukame__circle-badge">{{ item.limited[0] }}</div>
-          </div>
-        </nuxt-link>
-      </li>
-    </ul>
+            <div class="marukame__circle">
+              <div class="marukame__circle-badge">{{ item.limited[0] }}</div>
+            </div>
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -94,6 +106,18 @@ export default {
       endpoint: 'menu'
     })
     return data
+  },
+  data () {
+    return {
+      menuFilters: {
+        shop: {
+          label: '店内メニュー'
+        },
+        takeout: {
+          label: 'お持ち帰りメニュー'
+        }
+      }
+    }
   },
   created () {
   },
