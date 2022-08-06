@@ -2,13 +2,24 @@
   <div class="wrapper">
     <div class="menu">
       <div class="menu__nav">
-        <label class="menu__item">
+        <label class="menu__nav-item">
           <input type="radio" value="shop">
-          <span class="menu__item-label"></span>
+          <span class="menu__nav-item-label"></span>
         </label>
-        <label for="" class="menu__item"></label>
+        <label for="" class="menu__item">
+          <input type="radio" value="takeout">
+          <span class="menu__nav-item-label"></span>
+        </label>
       </div>
-      <ul class="menu__list"></ul>
+      <ul class="menu__list">
+        <li class="menu__item">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </li>
+      </ul>
     </div>
     <div class="marukame">
       <ul
