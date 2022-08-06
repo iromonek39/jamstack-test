@@ -140,6 +140,79 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.menu {
+  position: absolute;
+  top: 0;
+  width: calc(100% - 240px);
+  top: 60px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-family: Yu Mincho Pr6N D,serif;
+  transition: -webkit-transform .17s linear;
+  transition: transform .17s linear;
+  transition: transform .17s linear,-webkit-transform .17s linear;
+
+  .menu__nav {
+    background-color: #fbf7ef;
+    display: flex;
+    justify-content: center;
+    grid-gap: 2px;
+    gap: 2px;
+    padding-top: 4px;
+    width: 100%;
+
+    .menu__nav-item {
+      flex: 0 0 280px;
+      :checked+.menu__nav-item-label {
+        color: #c81432;
+        border-color: #c81432; 
+      }
+
+      .menu__nav-item-label {
+        display: flex;
+        font-size: 20px;
+        height: 60px;
+        border-bottom: 4px solid #ddd;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: color .17s linear,border-color .17s linear;
+      }
+    }
+  }
+
+  .menu__list {
+    display: flex;
+    justify-content: center;
+    grid-gap: 8px;
+    gap: 8px;
+    width: 100%;
+    overflow: auto;
+    white-space: normal;
+    padding: 15px 0;
+    background-color: #f2eee6;
+
+    .menu__item {
+      flex: 0 0 auto;
+
+      span {
+        display: block;
+        font-size: 14px;
+        line-height: 1;
+        height: 30px;
+        padding: 0 12px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color .17s linear,background-color .17s linear;
+      }
+    }
+  }
+}
 .marukame {
   max-width: 1100px;
   margin: 0 auto;
