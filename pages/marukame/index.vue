@@ -7,6 +7,7 @@
           :key="index"
           class="menu__nav-item">
           <input
+            v-model="defaultKey"
             type="radio"
             name="filter"
             :value="key"
@@ -15,12 +16,14 @@
         </label>
       </div>
       <ul class="menu__list">
-        <li class="menu__item">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+        <li
+          v-for="item in defaultKey === 'shop' ? shop : takeout"
+          :key="item.id"
+          class="menu__item"
+          @click="navFilter(item.id)">
+          <span :data-js-current="item.id === navFilterItem ? 'true' : 'false'">
+            {{ item.name }}
+          </span>
         </li>
       </ul>
     </div>
@@ -124,6 +127,7 @@ export default {
   data () {
     return {
       defaultKey: 'shop',
+      navFilterItem: '',
       menuFilters: {
         shop: {
           label: '店内メニュー'
@@ -296,11 +300,16 @@ export default {
       ]
     }
   },
+  computed: {
+  },
   created () {
   },
   mounted () {
   },
   methods: {
+    navFilter (item) {
+      this.navFilterItem = item
+    }
   }
 }
 </script>
@@ -371,6 +380,7 @@ input[type="radio"] {
 
     .menu__item {
       flex: 0 0 auto;
+      cursor: pointer;
 
       span {
         display: block;
@@ -383,6 +393,11 @@ input[type="radio"] {
         align-items: center;
         justify-content: center;
         transition: color .17s linear,background-color .17s linear;
+
+        &[data-js-current=true] {
+          color: #fff;
+          background-color: #c81432;
+        }
       }
     }
   }
