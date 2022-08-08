@@ -2,13 +2,16 @@
   <div class="wrapper">
     <div class="menu">
       <div class="menu__nav">
-        <label class="menu__nav-item">
-          <input type="radio" value="shop">
-          <span class="menu__nav-item-label"></span>
-        </label>
-        <label for="" class="menu__item">
-          <input type="radio" value="takeout">
-          <span class="menu__nav-item-label"></span>
+        <label
+          v-for="(item, key, index) in menuFilters"
+          :key="index"
+          class="menu__nav-item">
+          <input
+            type="radio"
+            name="filter"
+            :value="key"
+            :checked="key === defaultKey">
+          <span class="menu__nav-item-label">{{ item.label }}</span>
         </label>
       </div>
       <ul class="menu__list">
@@ -120,6 +123,7 @@ export default {
   },
   data () {
     return {
+      defaultKey: 'shop',
       menuFilters: {
         shop: {
           label: '店内メニュー'
@@ -127,7 +131,169 @@ export default {
         takeout: {
           label: 'お持ち帰りメニュー'
         }
-      }
+      },
+      shop: [
+        {
+          id: 'udon',
+          createdAt: '2022-04-26T02:56:09.414Z',
+          updatedAt: '2022-06-30T10:05:35.331Z',
+          publishedAt: '2022-05-02T08:05:04.982Z',
+          revisedAt: '2022-06-20T07:29:51.350Z',
+          meta: '{description: \'丸亀製麺は全店に製麺機を置いて、打ち立て、茹でたての味を実現。 国産小麦…}',
+          name: 'うどん',
+          description: '丸亀製麺は全店に製麺機を置いて、打ち立て、茹でたての味を実現。\n国産小麦100％にこだわった讃岐うどんのおいしさを、心ゆくまでご堪能ください。',
+          notes: [
+            {
+              fieldId: 'note',
+              note: 'お持ち帰りの場合には、表示価格に加えて容器代30円を頂戴します。'
+            },
+            {
+              fieldId: 'note',
+              note: '得サイズはお持ち帰り対象外です。'
+            }
+          ],
+          price_notes: [
+            {
+              fieldId: 'note',
+              note: '得サイズはお持ち帰り対象外です。'
+            }
+          ],
+          link: '/menu/udon/',
+          relation: null,
+          howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
+          concept: '{contents: Array(7), fieldId: \'concept\', link: \'/co…}'
+        },
+        {
+          id: 'tempura',
+          createdAt: '2022-04-26T03:00:22.300Z',
+          updatedAt: '2022-07-04T01:52:32.713Z',
+          publishedAt: '2022-05-02T08:04:18.296Z',
+          revisedAt: '2022-06-14T08:35:45.980Z',
+          meta: '{description: \'丸亀製麺は、天ぷらもすべての店で、手作り、揚げたて。おいしい天ぷらが食べ…}',
+          name: '天ぷら',
+          description: 'だしとの相性にこだわった天ぷらは、うどんのおいしさを引き立てる最高の相棒。\nアツアツ、サクサクの揚げたてをどうぞ。',
+          notes: null,
+          price_notes: null,
+          link: '/menu/tempura/',
+          relation: '{fieldId: \'relation\', label: \'お持ち帰り方法はこちら\', link: \'…}',
+          howto: '{contents: Array(6), fieldId: \'howto\', notes: Array…}',
+          concept: '{contents: Array(3), fieldId: \'concept\', link: \'/co…}'
+        },
+        {
+          id: 'gohanmono',
+          createdAt: '2022-04-26T03:01:01.586Z',
+          updatedAt: '2022-07-03T23:57:33.071Z',
+          publishedAt: '2022-05-02T08:04:00.702Z',
+          revisedAt: '2022-07-03T23:57:33.071Z',
+          meta: '{description: \'国産米をふっくら炊きあげました。讃岐といえばうどんといなり。のりの風味が…}',
+          name: 'ご飯もの',
+          description: '国産米をふっくら炊きあげました。\nのりの風味が香るおむすびは、4種類の味をお楽しみいただけます。',
+          notes: '[{…}, {…}]',
+          price_notes: '[]',
+          link: '/menu/gohanmono/',
+          relation: null,
+          howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
+          concept: null
+        },
+        {
+          id: 'topping',
+          createdAt: '2022-04-26T03:10:01.031Z',
+          updatedAt: '2022-07-18T01:49:55.966Z',
+          publishedAt: '2022-05-02T08:03:39.024Z',
+          revisedAt: '2022-07-18T01:49:55.966Z',
+          meta: '{description: \'讃岐うどんの醍醐味は、カスタマイズ。無料の薬味やお好みのトッピングで自由…}',
+          name: '薬味・\nトッピング',
+          description: 'お好みの味にカスタマイズ。\n自由なアレンジで、自分だけの味を見つけてください。',
+          notes: '[{…}]',
+          price_notes: '[]',
+          link: '/menu/topping/',
+          relation: null,
+          howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
+          concept: null
+        }
+      ],
+      takeout: [
+        {
+          id: 'udonbento',
+          createdAt: '2022-04-26T02:59:14.614Z',
+          updatedAt: '2022-06-14T08:35:16.114Z',
+          publishedAt: '2022-05-02T08:04:43.219Z',
+          revisedAt: '2022-06-14T08:35:16.114Z',
+          meta: '{description: \'丸亀製麺独自のもちもちとした食感と、つるんとしたのど越しのあるうどんを、…}',
+          name: 'うどん弁当',
+          description: '丸亀製麺独自のもちもちとした食感と、つるんとしたのど越しのあるうどんを、お弁当でも味わえます。ご注文ごとにつくるできたてのおいしさをぜひ。',
+          notes: null,
+          price_notes: null,
+          link: '/menu/udonbento/',
+          relation: '{fieldId: \'relation\', label: \'うどん・天ぷらのお持ち帰り方法\', lin…}',
+          howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
+          concept: null
+        },
+        {
+          id: 'udon',
+          createdAt: '2022-04-26T02:56:09.414Z',
+          updatedAt: '2022-06-30T10:05:35.331Z',
+          publishedAt: '2022-05-02T08:05:04.982Z',
+          revisedAt: '2022-06-20T07:29:51.350Z',
+          meta: '{description: \'丸亀製麺は全店に製麺機を置いて、打ち立て、茹でたての味を実現。 国産小麦…}',
+          name: 'うどん',
+          description: '丸亀製麺は全店に製麺機を置いて、打ち立て、茹でたての味を実現。\n国産小麦100％にこだわった讃岐うどんのおいしさを、心ゆくまでご堪能ください。',
+          notes: '[{…}, {…}]',
+          price_notes: '[{…}]',
+          link: '/menu/udon/',
+          relation: null,
+          howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
+          concept: '{contents: Array(7), fieldId: \'concept\', link: \'/co…}'
+        },
+        {
+          id: 'tempura',
+          createdAt: '2022-04-26T03:00:22.300Z',
+          updatedAt: '2022-07-04T01:52:32.713Z',
+          publishedAt: '2022-05-02T08:04:18.296Z',
+          revisedAt: '2022-06-14T08:35:45.980Z',
+          meta: '{description: \'丸亀製麺は、天ぷらもすべての店で、手作り、揚げたて。おいしい天ぷらが食べ…}',
+          name: '天ぷら',
+          description: 'だしとの相性にこだわった天ぷらは、うどんのおいしさを引き立てる最高の相棒。\nアツアツ、サクサクの揚げたてをどうぞ。',
+          notes: null,
+          price_notes: null,
+          link: '/menu/tempura/',
+          relation: '{fieldId: \'relation\', label: \'お持ち帰り方法はこちら\', link: \'…}',
+          howto: '{contents: Array(6), fieldId: \'howto\', notes: Array…}',
+          concept: '{contents: Array(3), fieldId: \'concept\', link: \'/co…}'
+        },
+        {
+          id: 'gohanmono',
+          createdAt: '2022-04-26T03:01:01.586Z',
+          updatedAt: '2022-07-03T23:57:33.071Z',
+          publishedAt: '2022-05-02T08:04:00.702Z',
+          revisedAt: '2022-07-03T23:57:33.071Z',
+          meta: '{description: \'国産米をふっくら炊きあげました。讃岐といえばうどんといなり。のりの風味が…}',
+          name: 'ご飯もの',
+          description: '国産米をふっくら炊きあげました。\nのりの風味が香るおむすびは、4種類の味をお楽しみいただけます。',
+          notes: '[{…}, {…}]',
+          price_notes: '[]',
+          link: '/menu/gohanmono/',
+          relation: null,
+          howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
+          concept: null
+        },
+        {
+          id: 'topping',
+          createdAt: '2022-04-26T03:10:01.031Z',
+          updatedAt: '2022-07-18T01:49:55.966Z',
+          publishedAt: '2022-05-02T08:03:39.024Z',
+          revisedAt: '2022-07-18T01:49:55.966Z',
+          meta: '{description: \'讃岐うどんの醍醐味は、カスタマイズ。無料の薬味やお好みのトッピングで自由…}',
+          name: '薬味・\nトッピング',
+          description: 'お好みの味にカスタマイズ。\n自由なアレンジで、自分だけの味を見つけてください。',
+          notes: '[{…}]',
+          price_notes: '[]',
+          link: '/menu/topping/',
+          relation: null,
+          howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
+          concept: null
+        }
+      ]
     }
   },
   created () {
@@ -140,6 +306,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+input[type="radio"] {
+  display: none;
+}
+.wrapper {
+  padding-top: 250px;
+  padding-bottom: 60px;
+  background-color: #f2eee6;
+}
 .menu {
   position: absolute;
   top: 0;
@@ -168,7 +342,7 @@ export default {
       flex: 0 0 280px;
       :checked+.menu__nav-item-label {
         color: #c81432;
-        border-color: #c81432; 
+        border-color: #c81432;
       }
 
       .menu__nav-item-label {
