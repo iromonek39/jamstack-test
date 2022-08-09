@@ -20,12 +20,22 @@
           v-for="item in defaultKey === 'shop' ? shop : takeout"
           :key="item.id"
           class="menu__item"
-          @click="navFilter(item.id)">
+          @click="onChangeFilter(item.id)">
           <span :data-js-current="item.id === navFilterItem ? 'true' : 'false'">
             {{ item.name }}
           </span>
         </li>
       </ul>
+    </div>
+    <div class="description">
+      <div>
+        <p class="description__text"></p>
+        <div class="category">
+          <ul class="category__list">
+            <li class="category__item"></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="marukame">
       <ul
@@ -307,7 +317,7 @@ export default {
   mounted () {
   },
   methods: {
-    navFilter (item) {
+    onChangeFilter (item) {
       this.navFilterItem = item
     }
   }
