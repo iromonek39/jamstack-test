@@ -338,6 +338,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.heading {
+  font-size: 38px;
+  line-height: 56px;
+}
 input[type="radio"] {
   display: none;
 }
