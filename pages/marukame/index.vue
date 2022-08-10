@@ -29,10 +29,10 @@
     </div>
     <div class="description">
       <div>
-        <p class="description__text"></p>
+        <p class="description__text">テキストテキストテキストテキストテキストテキストテキスト</p>
         <div class="category">
           <ul class="category__list">
-            <li class="category__item"></li>
+            <li class="category__item">テキストテキストテキストテキストテキストテキストテキスト</li>
           </ul>
         </div>
       </div>
