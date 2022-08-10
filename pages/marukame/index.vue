@@ -27,12 +27,18 @@
         </li>
       </ul>
     </div>
+    <h1 class="heading">{{ setDescription[0].name }}</h1>
     <div class="description">
       <div>
-        <p class="description__text">テキストテキストテキストテキストテキストテキストテキスト</p>
+        <p class="description__text">{{ setDescription[0].description }}</p>
         <div class="category">
           <ul class="category__list">
-            <li class="category__item">テキストテキストテキストテキストテキストテキストテキスト</li>
+            <li
+              v-for="(item, index) in setDescription[0].notes"
+              :key="index"
+              class="category__item">
+              {{ item.note }}
+            </li>
           </ul>
         </div>
       </div>
@@ -137,7 +143,7 @@ export default {
   data () {
     return {
       defaultKey: 'shop',
-      navFilterItem: '',
+      navFilterItem: 'udon',
       menuFilters: {
         shop: {
           label: '店内メニュー'
@@ -311,6 +317,13 @@ export default {
     }
   },
   computed: {
+    setDescription () {
+      if (this.defaultKey === 'shop') {
+        return this.shop.filter(item => item.id === this.navFilterItem)
+      } else {
+        return this.takeout.filter(item => item.id === this.navFilterItem)
+      }
+    }
   },
   created () {
   },
@@ -412,6 +425,42 @@ input[type="radio"] {
     }
   }
 }
+
+.description {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 28px 56px;
+  grid-gap: 60px;
+  gap: 60px;
+  white-space: pre-wrap;
+
+  .description__text {
+    font-size: 14px;
+    line-height: 2;
+  }
+}
+
+.category {
+  margin-top: 12px;
+
+  .category__list {
+    font-family: Yu Gothic Pr6N M,sans-serif;
+    line-height: 18px;
+    font-size: 10px;
+    color: #666;
+
+    .category__item {
+      margin-left: calc(1em + 5px);
+      text-indent: calc((1em + 5px)*-1);
+
+      &:before {
+        margin-right: 5px;
+        content: "※";
+      }
+    }
+  }
+}
+
 .marukame {
   max-width: 1100px;
   margin: 0 auto;
