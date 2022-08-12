@@ -122,8 +122,8 @@ export default {
 
   microcms: {
     options: {
-      serviceDomain: "jamstacktestomori",
-      apiKey: "1d7d58cbe3b84c6ba5201ed4cc2418b223b7",
+      serviceDomain: "marukame",
+      apiKey: "3980738c96ba45de85d4868b97e3a513fc52",
     },
     mode: process.env.NODE_ENV === "production" ? "server" : "all",
   }
