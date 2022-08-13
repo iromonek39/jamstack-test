@@ -322,6 +322,12 @@ export default {
       }
     }
   },
+  watch: {
+    defaultKey (newVal, oldVal) {
+      console.log(newVal)
+      console.log(oldVal)
+    }
+  },
   created () {
   },
   mounted () {
