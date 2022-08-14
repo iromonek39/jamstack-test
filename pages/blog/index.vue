@@ -2,6 +2,29 @@
   <div class="blog">
     <Search
       @searchResults="getSearchResults"/>
+    <h2>都道府県</h2>
+    <select
+      id="prefs"
+      v-model="selectPrefs"
+      name="prefs">
+      <option
+        v-for="pref in prefs"
+        :key="pref.name"
+        :value="pref.name">
+        {{ pref.name }}
+      </option>
+    </select>
+    <h2>地域</h2>
+    <select
+      id="city"
+      name="city">
+      <option
+        v-for="city in filterPrefs[0].cities"
+        :key="city.name"
+        :value="city.name">
+        {{ city.name }}
+      </option>
+    </select>
     <!-- <Category /> -->
     <ul class="blog__list">
       <li
@@ -76,6 +99,24 @@ export default {
   name: 'Blog',
   data () {
     return {
+      selectPrefs: '北海道',
+      filterPrefs: [],
+      prefs: [
+        {
+          name: '北海道',
+          cities: [
+            { name: '稚内', id: '011000' },
+            { name: '旭川', id: '012010' }
+          ]
+        },
+        {
+          name: '青森',
+          cities: [
+            { name: '青森', id: '011000' },
+            { name: '八戸', id: '011000' }
+          ]
+        }
+      ],
       blogs: {
         total: 5,
         data: [
@@ -169,9 +210,17 @@ export default {
       }
     }
   },
+  watch: {
+    selectPrefs (val) {
+      this.doFilterPrefs(val)
+    }
+  },
   created () {
     // this.getApi()
     // this.getSingleData(2113)
+  },
+  mounted () {
+    this.doFilterPrefs(this.selectPrefs)
   },
   methods: {
     // ...mapActions('api', ['getApi', 'getSingleData']),
@@ -183,6 +232,9 @@ export default {
       console.log(blogData)
       this.updateBlogDetailData(blogData)
       this.$router.push(`/blog/${blogData.id}`)
+    },
+    doFilterPrefs (pref) {
+      this.filterPrefs = this.prefs.filter(item => item.name === pref)
     }
   }
 }

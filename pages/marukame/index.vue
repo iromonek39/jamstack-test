@@ -326,7 +326,6 @@ export default {
     defaultKey (newVal, oldVal) {
       console.log(newVal)
       console.log(oldVal)
-      this.$router.push(`/${oldVal}`)
     }
   },
   created () {
