@@ -20,7 +20,7 @@
           v-for="item in defaultKey === 'shop' ? shop : takeout"
           :key="item.id"
           class="menu__item"
-          @click="onChangeFilter(item.id)">
+          @click="onChangeFilter(item.id, item.link)">
           <span :data-js-current="item.id === navFilterItem ? 'true' : 'false'">
             {{ item.name }}
           </span>
@@ -31,7 +31,7 @@
     <div class="description">
       <div>
         <p class="description__text">{{ setDescription[0].description }}</p>
-        <div class="category">
+        <!-- <div class="category">
           <ul class="category__list">
             <li
               v-for="(item, index) in setDescription[0].notes"
@@ -40,7 +40,7 @@
               {{ item.note }}
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="marukame">
@@ -51,7 +51,7 @@
         data-col-sm="2"
         data-gap="small">
         <li
-          v-for="item in contents"
+          v-for="item in getMarukameData"
           :key="item.id"
           class="marukame__item">
           <nuxt-link
@@ -131,11 +131,11 @@
 <script>
 export default {
   name: 'Marukame',
-  async asyncData ({ $microcms }) {
-    const data = await $microcms.get({
+  async asyncData ({ $microcms, query }) {
+    const marukameData = await $microcms.get({
       endpoint: 'menus'
     })
-    return data
+    return marukameData
   },
   data () {
     return {
@@ -175,7 +175,7 @@ export default {
               note: '得サイズはお持ち帰り対象外です。'
             }
           ],
-          link: '/menu/udon/',
+          link: '/udon/',
           relation: null,
           howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
           concept: '{contents: Array(7), fieldId: \'concept\', link: \'/co…}'
@@ -191,7 +191,7 @@ export default {
           description: 'だしとの相性にこだわった天ぷらは、うどんのおいしさを引き立てる最高の相棒。\nアツアツ、サクサクの揚げたてをどうぞ。',
           notes: null,
           price_notes: null,
-          link: '/menu/tempura/',
+          link: '/tempura/',
           relation: '{fieldId: \'relation\', label: \'お持ち帰り方法はこちら\', link: \'…}',
           howto: '{contents: Array(6), fieldId: \'howto\', notes: Array…}',
           concept: '{contents: Array(3), fieldId: \'concept\', link: \'/co…}'
@@ -207,7 +207,7 @@ export default {
           description: '国産米をふっくら炊きあげました。\nのりの風味が香るおむすびは、4種類の味をお楽しみいただけます。',
           notes: '[{…}, {…}]',
           price_notes: '[]',
-          link: '/menu/gohanmono/',
+          link: '/gohanmono/',
           relation: null,
           howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
           concept: null
@@ -223,7 +223,7 @@ export default {
           description: 'お好みの味にカスタマイズ。\n自由なアレンジで、自分だけの味を見つけてください。',
           notes: '[{…}]',
           price_notes: '[]',
-          link: '/menu/topping/',
+          link: '/topping/',
           relation: null,
           howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
           concept: null
@@ -241,7 +241,7 @@ export default {
           description: '丸亀製麺独自のもちもちとした食感と、つるんとしたのど越しのあるうどんを、お弁当でも味わえます。ご注文ごとにつくるできたてのおいしさをぜひ。',
           notes: null,
           price_notes: null,
-          link: '/menu/udonbento/',
+          link: '/udonbento/',
           relation: '{fieldId: \'relation\', label: \'うどん・天ぷらのお持ち帰り方法\', lin…}',
           howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
           concept: null
@@ -257,7 +257,7 @@ export default {
           description: '丸亀製麺は全店に製麺機を置いて、打ち立て、茹でたての味を実現。\n国産小麦100％にこだわった讃岐うどんのおいしさを、心ゆくまでご堪能ください。',
           notes: '[{…}, {…}]',
           price_notes: '[{…}]',
-          link: '/menu/udon/',
+          link: '/udon/',
           relation: null,
           howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
           concept: '{contents: Array(7), fieldId: \'concept\', link: \'/co…}'
@@ -273,7 +273,7 @@ export default {
           description: 'だしとの相性にこだわった天ぷらは、うどんのおいしさを引き立てる最高の相棒。\nアツアツ、サクサクの揚げたてをどうぞ。',
           notes: null,
           price_notes: null,
-          link: '/menu/tempura/',
+          link: '/tempura/',
           relation: '{fieldId: \'relation\', label: \'お持ち帰り方法はこちら\', link: \'…}',
           howto: '{contents: Array(6), fieldId: \'howto\', notes: Array…}',
           concept: '{contents: Array(3), fieldId: \'concept\', link: \'/co…}'
@@ -289,7 +289,7 @@ export default {
           description: '国産米をふっくら炊きあげました。\nのりの風味が香るおむすびは、4種類の味をお楽しみいただけます。',
           notes: '[{…}, {…}]',
           price_notes: '[]',
-          link: '/menu/gohanmono/',
+          link: '/gohanmono/',
           relation: null,
           howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
           concept: null
@@ -305,7 +305,7 @@ export default {
           description: 'お好みの味にカスタマイズ。\n自由なアレンジで、自分だけの味を見つけてください。',
           notes: '[{…}]',
           price_notes: '[]',
-          link: '/menu/topping/',
+          link: '/topping/',
           relation: null,
           howto: '{contents: Array(0), fieldId: \'howto\', notes: Array…}',
           concept: null
@@ -314,6 +314,12 @@ export default {
     }
   },
   computed: {
+    getMarukameData () {
+      return this.contents.filter(item => {
+        const itemUrl = item.href.split('/', 2).join('/') + '/'
+        return itemUrl === this.$route.query.filter
+      })
+    },
     setDescription () {
       if (this.defaultKey === 'shop') {
         return this.shop.filter(item => item.id === this.navFilterItem)
@@ -333,8 +339,15 @@ export default {
   mounted () {
   },
   methods: {
-    onChangeFilter (item) {
+    onChangeFilter (item, url) {
+      this.$router.push({
+        path: 'marukame',
+        query: {
+          filter: url
+        }
+      })
       this.navFilterItem = item
+      console.log(url)
     }
   }
 }
