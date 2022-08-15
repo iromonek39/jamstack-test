@@ -13,7 +13,7 @@
         <ul class="nav__list">
           <li
             class="nav__item"
-            @click="linkTo('marukame')">
+            @click="linkTo('marukame?filter=/udon/')">
             丸亀
           </li>
           <li

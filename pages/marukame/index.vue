@@ -330,8 +330,11 @@ export default {
   },
   watch: {
     defaultKey (newVal, oldVal) {
-      console.log(newVal)
-      console.log(oldVal)
+      if (oldVal === 'takeout') {
+        if (this.navFilterItem === 'udonbento') {
+          this.navFilterItem = 'udon'
+        }
+      }
     }
   },
   created () {
